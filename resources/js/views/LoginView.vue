@@ -3,19 +3,19 @@
         <div class="bg-img"></div>
         <div class="wrap">
             <div class="login">
-                <form>
+                <form @submit.prevent="submit">
                     <img src="" alt="">
                     <h1 class="title">Login Dashboard <br> Tourism Surabaya</h1>
                     <div class="row">
                         <label class="label">Masukkan email:</label>
-                        <input class="input" type="email" required>
+                        <input v-model="form.email" class="input" type="email" required>
                     </div>
                     <div class="row">
                         <label class="label">Masukkan password:</label>
-                        <input class="input" type="password" required>
+                        <input v-model="form.password" class="input" type="password" required>
                     </div>
                     <div class="row">
-                        <button class="btn input">Login</button>
+                        <button type="submit" class="btn input">Login</button>
                     </div>
                     <a href="#" class="call-admin">Need Account? Contact Admin</a>
                 </form>
@@ -25,7 +25,28 @@
 </template>
 
 <script setup>
+import { reactive, ref } from 'vue';
+import api from '../functions/api';
+import router from '../routes';
 
+const form = reactive({
+    email: '',
+    password: ''
+})
+const submitting = ref(false)
+const errors = ref({})
+
+const submit = async () => {
+    submitting.value = true
+    try {
+        await api.POST('api/login', form)
+        router.replace({name: 'dashboarduser'})
+    } catch (error) {
+        errors.value = api.formErrors(error)
+    } finally {
+        submitting.value = false
+    }
+}
 </script>
 
 <style scoped>
