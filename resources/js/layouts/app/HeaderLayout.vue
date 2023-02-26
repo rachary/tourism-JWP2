@@ -1,5 +1,5 @@
 <template>
-    <header>
+    <header id="header">
         <div class="wrap">
             <a href="#">
                 <img class="logo" src="https://tourism.surabaya.go.id/assets/front/images/img-logo-sparkling.png" alt="">
@@ -35,6 +35,9 @@ const navToggleActive = ref(false)
 </script>
 
 <style scoped>
+#header {
+    transition: .5s;
+}
 .wrap {
     position: fixed;
     width: 100%;
@@ -42,7 +45,7 @@ const navToggleActive = ref(false)
     justify-content: space-between;
     align-items: center;
     padding: .5rem 1rem;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, .5), rgba(255, 255, 255, .5));
+    background: #8AAAE4;
     backdrop-filter: blur(3px);
     z-index: 10;
 }
@@ -74,18 +77,18 @@ nav {
 }
 
 .nav-link:hover, .nav-link-current-active {
-    color: white;
-    filter: brightness(150%);
+    color: #FFFFD2 !important;
 }
 .nav-link {
     position: relative;
     padding: .3rem 0;
+    color: #FFFFFF;
 }
 .nav-link::after {
     content: '';
     width: 100%;
     height: .2rem;
-    background: #333;
+    background: #FFFFFF;
     position: absolute;
     left: .4rem;
     bottom: 0;
@@ -93,7 +96,7 @@ nav {
 }
 .nav-link:hover::after, .nav-link-current-active::after {
     left: 0;
-    background: white;
+    background: #F9EBC8;
 }
 .nav-item-active {
     transform: translateX(4rem);
@@ -133,7 +136,7 @@ nav {
     position: absolute;
     width: 100%;
     height: 0.25rem;
-    background: #333;
+    background: #F9EBC8;
     left: 0;
 }
 .nav-toggle::before {
@@ -166,5 +169,35 @@ nav {
         opacity: 1;
     }
 }
-
+@media only screen and (max-width: 992px) {
+    .nav-list {
+        margin-right: 5rem;
+    }
+}
+@media only screen and (max-width: 991px) and (min-width: 768px) {
+    .nav-list {
+        margin-right: 3rem;
+    }
+}
+@media only screen and (max-width: 767px) and (min-width: 576px) {
+    .nav-list {
+        margin-right: 2rem;
+    }
+}
+@media only screen and (max-width: 575px) {
+    .nav-list {
+        margin-right: 1rem;
+    }
+}
+@media only screen and (max-width: 767px) {
+    .nav-list {
+        display: none;
+    }
+    .nav-list-active {
+        display: flex;
+    }
+    .nav-toggle {
+        display: block;
+    }
+}
 </style>

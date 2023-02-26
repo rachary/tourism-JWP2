@@ -10,3 +10,7 @@
 import HeaderLayout from './HeaderLayout.vue';
 import FooterLayout from './FooterLayout.vue';
 </script>
+
+<style scoped>
+
+</style>

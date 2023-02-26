@@ -1,36 +1,42 @@
 <template>
-    <app-modal-component ref="modal" title="Add User">
+<div class="modal">
+    <app-modal-component ref="modal" :title="title" class="center">
         <div>
             <form @submit.prevent="submit">
-                <div>
-                    <label>Name</label>
-                    <input v-model="form.name" type="text" required>
+                <div class="row">
+                    <label>Masukkan Nama:</label>
+                    <input v-model="form.name" type="text">
+                    <div class="error" v-if="errors.name">{{ errors.name[0] }}</div>
                 </div>
-                <div>
-                    <label>Email</label>
-                    <input v-model="form.email" type="email" required>
+                <div class="row">
+                    <label>Masukkan Email:</label>
+                    <input v-model="form.email" type="text">
+                    <div class="error" v-if="errors.email">{{ errors.email[0] }}</div>
                 </div>
-                <div>
-                    <label>Password</label>
-                    <input v-model="form.password" type="password" required>
+                <div class="row">
+                    <label>Masukkan Password:</label>
+                    <input v-model="form.password" type="password">
+                    <div class="error" v-if="errors.password">{{ errors.password[0] }}</div>
                 </div>
-                <div>
-                    <label>Phone</label>
-                    <input v-model="form.phone" type="text" required>
+                <div class="row">
+                    <label>Masukkan No HP:</label>
+                    <input v-model="form.phone" type="text">
+                    <div class="error" v-if="errors.phone">{{ errors.phone[0] }}</div>
                 </div>
-                <div>
-                    <label>Role</label>
+                <div class="row">
+                    <label>Pilih Role:</label>
                     <select v-model="form.role" class="form-input">
                         <option value="contributor">Contributor</option>
                         <option value="administrator">Administrator</option>
                     </select>
                 </div>
-                <div>
-                    <button type="submit">Add User</button>
+                <div class="row center">
+                    <button class="cta" type="submit">Tambah User</button>
                 </div>
             </form>
         </div>
     </app-modal-component>
+</div>
 </template>
 
 <script setup>
@@ -39,7 +45,7 @@ import AppModalComponent from '../../components/AppModalComponent.vue';
 import api from '../../functions/api';
 
 const emit = defineEmits(['created'])
-
+const title = ref('Tambah User Baru')
 const modal = ref()
 const submitting = ref(false)
 const errors = ref({})
@@ -64,10 +70,59 @@ const submit = async () => {
         emit('created', response)
         close()
     } catch (error) {
-        errors.value = api.formErrors(error)        
+        errors.value = api.formErrors(error)     
     } finally {
         submitting.value = false
+        form.value.name = ''
+        form.value.email = ''
+        form.value.password = ''
+        form.value.phone = ''
+        form.value.role = 'contributor'
     }
 }
+
 defineExpose({ open, close })
 </script>
+
+<style scoped>
+form {
+    width: 30vw;
+    padding: 1rem 2rem;
+    background: white;
+    text-align: left;
+}
+
+.row {
+    margin-bottom: 1.2rem;
+}
+.center {
+    text-align: center;
+}
+input, select, option, button {
+    width: 100%;
+    background: #FD8A8A;
+    padding: .2rem .5rem;
+    border-radius: .125rem;
+    outline: none;
+    color: white;
+    letter-spacing: .0625rem;
+}
+select, option {
+    padding: .375rem;
+}
+button {
+    width: fit-content;
+    
+}
+.error {
+    font-size: .8rem;
+    color: #FF0032;
+    position: absolute;
+    letter-spacing: .0625rem;
+}
+label {
+    font-size: .8rem;
+    color: #555;
+}
+
+</style>
