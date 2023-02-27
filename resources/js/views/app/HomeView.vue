@@ -1,13 +1,49 @@
 <template>
-    <div class="wrap">
-    <section class="hero">
-        INI HOME VIEW
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius nisi dolores itaque voluptate laboriosam eligendi fuga atque quisquam voluptas asperiores quaerat, nemo pariatur fugit quos voluptatibus rerum non repellendus. Corrupti, amet culpa dolorum voluptates nulla laborum veniam ea molestiae in blanditiis assumenda alias. Id totam aliquam, nostrum ducimus vel corrupti odit dicta perferendis voluptates quaerat veniam vero numquam, distinctio molestiae, ab atque error adipisci hic. Eos sequi delectus amet repellendus velit illum iste animi, doloribus omnis repellat aliquam. Aspernatur, reiciendis consequuntur! Corrupti corporis tempora quae quo, vitae earum, fugit maxime dolor reiciendis distinctio laudantium, blanditiis obcaecati doloremque aperiam velit similique et minima. Ullam optio possimus corrupti aliquid vitae, distinctio vel laborum qui et provident nulla ea aspernatur ipsam voluptas doloremque. Labore explicabo, eligendi voluptate, laudantium id sed perferendis iure vero accusamus, earum cupiditate quo suscipit magni illo sequi? Saepe dolore, possimus recusandae explicabo nemo sapiente est, nam ipsum, omnis facilis labore ipsa in iste. Ipsam quia eum rerum laudantium incidunt ducimus possimus voluptatibus perspiciatis tenetur nulla repellat nemo voluptate iusto consequuntur sunt laboriosam deleniti aperiam adipisci, eligendi odit sint ipsa! Ratione aut a illo eligendi vitae earum ullam fugit deleniti assumenda nihil soluta possimus nulla, rerum magnam voluptas! Voluptatem laudantium optio dolore eligendi dignissimos nostrum perferendis doloremque harum sed tenetur amet, exercitationem a accusantium tempore officia dicta! Harum, tempore dolor? Ea quo cumque autem odit explicabo, quasi nihil aut sint nulla earum accusamus reprehenderit animi blanditiis, accusantium nam labore rerum porro id, iusto aliquam. Praesentium nemo, porro repellat vel nobis nisi labore doloremque commodi corporis quam magnam autem itaque ducimus facere, ipsa molestiae harum ex officiis consectetur a quibusdam. Repellat earum, neque eum eius placeat sequi incidunt perspiciatis, a corrupti, vel molestias? Itaque doloremque alias eum laboriosam aperiam similique quibusdam, sapiente at distinctio, dolores totam quisquam architecto natus quia nisi libero illum repudiandae nesciunt quidem. Eligendi sed quidem quo, cum deserunt maxime. Ipsam repellendus, a corporis repellat fugit eius veritatis voluptatum aspernatur odio laudantium nobis ab nemo voluptates quos quasi quo quis eos dolorem quibusdam similique doloribus? Consectetur natus dolores quam nesciunt illo temporibus maiores magnam repudiandae quidem rem! Inventore vero aut aliquam ut doloremque fugiat blanditiis impedit esse, unde, quaerat consectetur sequi animi magnam reiciendis est eveniet illo. Placeat, beatae. Expedita, ipsa blanditiis consectetur eligendi voluptate quaerat commodi, tempore libero doloremque neque magni, minima accusantium vel odio dolores eius quis placeat tempora iure! Error alias dolorem quisquam nulla laudantium ad blanditiis, ab vero magni, animi labore dicta culpa officiis optio placeat. Explicabo officia architecto rerum itaque est ratione vel repellendus ducimus et unde vero iure, quis odio, dolor animi. Asperiores consectetur quia facere animi laboriosam voluptate commodi error aliquid eaque, quo, ipsa incidunt neque quod pariatur a molestiae rerum quibusdam debitis quasi ex veritatis. Excepturi aspernatur alias nihil ut recusandae sapiente enim, minima distinctio. Laborum vero fugiat quo architecto excepturi omnis veritatis maiores quaerat neque incidunt voluptatibus aliquam ab maxime, et exercitationem, consequuntur, reiciendis modi! Provident totam repellendus autem voluptatem accusantium, numquam commodi quis, aut laborum maiores amet optio laboriosam alias culpa. At, quisquam necessitatibus! Itaque accusantium corrupti a, asperiores quasi ratione sunt dolore quas cum omnis amet odio perferendis labore nobis, obcaecati facere excepturi minima id vero est, voluptatibus tempore. Deleniti fugiat dolorem laborum, incidunt cum unde ex magnam qui esse ducimus eius tempora voluptatum optio adipisci ipsa molestias. Quo, possimus! Rerum, fugit ut veritatis repellat sunt consequuntur totam ratione nisi nesciunt, voluptate veniam omnis odio sint voluptatum praesentium quidem eaque tenetur? Omnis vel, natus laudantium quos labore a repudiandae odio iste et minus dignissimos, eos vero veniam nobis maiores beatae fuga corrupti ex similique. Iusto, voluptatem minus quibusdam facere expedita quis impedit, soluta incidunt velit nihil in iure. Aspernatur quam earum doloremque ratione doloribus inventore voluptates fuga eaque similique ab? Reiciendis, velit esse dolorem at nulla animi a, nostrum eligendi ex pariatur nisi sint facilis fuga voluptate corrupti ullam magnam consectetur. Molestiae voluptate impedit quibusdam? Neque ex dignissimos fugit quo odio architecto eaque. Perspiciatis nulla maiores similique temporibus! Consequatur laborum quisquam molestias ipsa, adipisci sequi debitis nobis nisi exercitationem? Doloremque impedit incidunt doloribus maxime voluptate aliquam a asperiores aperiam perspiciatis. Provident quasi dolorem nemo soluta repellendus asperiores, pariatur, possimus sapiente saepe voluptate repellat tempora quibusdam numquam tenetur sunt itaque hic voluptas adipisci. Libero asperiores quod quo delectus dolor doloribus ea? Earum, mollitia perferendis explicabo voluptate voluptas maiores. Pariatur impedit reprehenderit nihil, commodi voluptatum at laborum debitis soluta architecto accusamus quia, fugit asperiores ipsum dolorum! Totam sit nesciunt enim veniam doloribus, animi ut ipsum voluptates repudiandae cumque molestias, cum ipsa nostrum incidunt! Voluptatem tenetur numquam porro exercitationem? Obcaecati est porro dolores soluta nisi, tempore esse velit numquam ipsam quaerat alias cupiditate a vel eius ipsa possimus temporibus, cumque facilis maiores explicabo! Omnis id pariatur, obcaecati quisquam, porro perferendis impedit molestiae exercitationem repellat, veniam minus natus et ipsam placeat consectetur cupiditate quaerat! Repellendus vero animi dolores quae soluta consequatur molestias dolorem, placeat, facere pariatur quos quam. Magnam dolorem impedit, commodi vero inventore velit dolorum. Tenetur incidunt molestias aliquam, cumque perferendis, labore maiores vitae iste officia veritatis, ratione eligendi nam distinctio repellat ut voluptatibus minima praesentium impedit optio. Facere fuga nostrum blanditiis vitae eum quisquam iure sit distinctio, ducimus cupiditate nulla. Explicabo nesciunt velit optio eos molestias, similique temporibus provident voluptatem quis. Dolorum architecto voluptatem ad similique ex molestiae obcaecati beatae. Esse nam iure commodi cupiditate recusandae perferendis sunt, culpa maxime veritatis rerum? Assumenda iure odit molestiae maxime fugiat corrupti rerum velit repellendus, ut ipsum sapiente dolorem aut? Veritatis a rem tenetur suscipit architecto, sequi ut placeat at optio possimus. Sed quae nostrum possimus voluptatum, dolorem eaque amet iusto minima minus labore fugit accusantium, saepe, quis voluptate repudiandae molestias dignissimos ab? Ullam eaque maxime id ad. Veritatis dicta omnis et, saepe eum, assumenda, eligendi sit recusandae culpa aut facilis? Odio dolore quaerat voluptatibus earum praesentium ipsam, ea officiis in eum mollitia illo officia eaque autem dolorum quo, maiores enim totam iure nisi explicabo ipsa nesciunt. Distinctio corporis culpa quo ad praesentium dignissimos mollitia, animi aspernatur qui? Sunt quia odio fugit.
+    <section id="home" class="hero">
+        <video autoplay muted loop>
+            <source src="https://tourism.surabaya.go.id/assets/front/videos/surabaya.mp4">
+        </video>
+        <div class="wrap">
+            <div class="container">
+                <h2 class="sub-headline">You will love every corner of it</h2>
+                <h1 class="headline">Wisata Surabaya</h1>
+                <div class="headline-description">
+                    <div class="separator">
+                        <div class="line line-left"></div>
+                        <div class="asterisk"><fa-icon icon="fa-solid fa-asterisk" /></div>
+                        <div class="line line-right"></div>
+                    </div>
+                    <div class="single-animation">
+                        <h5>Let's explore one of the biggest city in Indonesia with famous name called City of Heroes.</h5>
+                        <a href="#beauty-of-surabaya" class="btn btn-cta">Explore</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="beauty-of-surabaya" class="beauty">
+        <div class="wrap">
+            <div class="beauty-info">
+                <div class="beauty-description padding-right animate-left">
+                    <div class="global-headline">
+                        <h2 class="sub-headline">Beauty of</h2>
+                        <h1 class="headline headline-second">Surabaya</h1>
+                    </div>
+                </div>
+                <div class="beauty-box">
+                    <div class="beauty-card">
+                        <div class="card-img">
+                            <img src="https://cdn0-production-images-kly.akamaized.net/hulauwuEHBRwulpomyqNYAQ-8e8=/640x853/smart/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/3000653/original/064636000_1576738759-73398065_2524026567685035_6452119119050789649_n.jpg" alt="">
+                        </div>
+                        <div class="card-title"></div>
+                        <button class="btn"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
     <section></section>
     <section></section>
-    <section></section>
-    </div>
 </template>
 
 <script setup>
@@ -16,7 +52,109 @@
 
 <style scoped>
 section {
+    display: inline-block;
+}
+#home > video {
     width: 100%;
-    min-height: 100vh;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    position: absolute;
+    z-index: -10;
+    filter: brightness(30%)
+}
+.hero {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #FFFFD2;
+}
+
+.sub-headline {
+    font-family: 'Beau Rivage', cursive;
+    font-size: 2.5rem;
+    transform: translateY(20%);
+    letter-spacing: .09rem;
+    pointer-events: none;
+}
+
+.first-letter {
+    font-family: 'Beau Rivage', cursive;
+    font-size: 4rem;
+}
+
+.headline {
+    text-transform: uppercase;
+    font-size: 3rem;
+    letter-spacing: .5rem;
+    pointer-events: none;
+}
+
+.separator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.line {
+    width: 100%;
+    height: .25rem;
+    background: #FFFFD2;
+    position: relative;
+}
+
+.line-right::before,
+.line-left::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    border: .5rem solid transparent;
+}
+
+.line-right::before {
+    border-right-color: #FFFFD2;
+    right: 0;
+}
+
+.line-left::before {
+    border-left-color: #FFFFD2;
+    left: 0;
+}
+
+.asterisk {
+    font-size: 1.2rem;
+}
+
+.headline-description h5 {
+    font-size: 1.2rem;
+    font-weight: 100;
+    text-transform: capitalize;
+    letter-spacing: .1875rem;
+    pointer-events: none;
+}
+
+.btn {
+    display: inline-block;
+    text-transform: uppercase;
+    letter-spacing: .125rem;
+}
+
+.btn-cta {
+    font-size: .8rem;
+    background: #8AAAE4;
+    padding: .5rem .9rem;
+    color: #FFFFD2;
+    border-radius: .4rem;
+    transition: background .5;
+    margin-top: 1rem;
+}
+
+/* Section 2 */
+#beauty-of-surabaya {
+    padding-top: 3.5rem;
 }
 </style>

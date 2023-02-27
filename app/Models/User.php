@@ -47,7 +47,7 @@ class User extends Authenticatable
      * 
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function user_role()
+    public function userRole()
     {
         return $this->belongsTo(UserRole::class);
     }
