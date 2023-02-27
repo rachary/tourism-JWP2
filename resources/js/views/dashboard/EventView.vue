@@ -6,7 +6,7 @@
         <div class="wrapper">
             <div>
                 <div>
-                    <button class="btn" @click="refUserAdd.open()">
+                    <button class="btn" @click="refEventAdd.open()">
                         <fa-icon icon="fa-solid fa-user-plus"></fa-icon>
                     </button>
                 </div>
@@ -21,20 +21,20 @@
                         <th>Description</th>
                         <th>Action</th>
                     </template>
-                    <tr v-for="(event, index) in users" :key="event.id">
+                    <tr v-for="(event, index) in events" :key="event.id">
                         <td>{{ index+1 }}</td>
-                        <td>{{ event.eventName }}</td>
-                        <td>{{ event.eventDate }}</td>
-                        <td>{{ event.eventAddress }}</td>
-                        <td>{{ event.eventImage }}</td>
-                        <td>{{ event.eventMaker }}</td>
-                        <td>{{ event.eventDecs }}</td>
-                        <td>{{ event.eventLoc }}</td>
+                        <td>{{ event.name }}</td>
+                        <td>{{ event.date }}</td>
+                        <td>{{ event.address }}</td>
+                        <td>{{ event.image }}</td>
+                        <td>{{ event.maker }}</td>
+                        <td>{{ event.decs }}</td>
+                        <td>{{ event.loc }}</td>
                         <td class="cta">
-                            <button @click="refUserUpdate.open(user)">
+                            <button @click="refEventUpdate.open(event)">
                                 <fa-icon icon="fa-solid fa-user-gear"></fa-icon>
                             </button>
-                            <button @click="deleteUser(user.id)">
+                            <button @click="deleteEvent(event.id)">
                                 <fa-icon icon="fa-solid fa-trash"></fa-icon>
                             </button>
                         </td>
@@ -42,9 +42,9 @@
                 </app-table-component>
             </div>
             <div>
-                <user-update-view ref="refUserUpdate" @updated="userUpdated"/>
+                <event-update-view ref="refEventUpdate" @updated="eventUpdated"/>
             </div>
-            <user-add-view ref="refUserAdd" @created="users.push($event)"/>
+            <event-add-view ref="refEventAdd" @created="events.push($event)"/>
         </div>
     </div>
 </template>
@@ -52,52 +52,56 @@
 <script setup>
 import { ref } from 'vue';
 import AppTableComponent from '../../components/AppTableComponent.vue';
-import UserAddView from './UserAddView.vue';
-import UserUpdateView from './UserUpdateView.vue';
+import EventAddView from './EventAddView.vue';
+import EventUpdateView from './EventUpdateView.vue';
 import api from '../../functions/api'
 
-const refUserUpdate = ref()
-const refUserAdd = ref()
+const refEventUpdate = ref()
+const refEventAdd = ref()
 const loading = ref(false)
-const users = ref([])
+const events = ref([])
 
-const getUsers = async () => {
+const getEvents = async () => {
     loading.value = true
     try {
-        const response = await api.GET('api/user')
-        users.value = response.data
+        const response = await api.GET('api/event')
+        events.value = response.data
     } finally {
         loading.value = false
     }
 }
 
-const userUpdated = (data) => {
-    users.value = users.value.map(user => {
-        if (user.id === data.id) {
-            user.name = data.name
-            user.email = data.email
-            user.phone = data.phone
+const eventUpdated = (data) => {
+    events.value = events.value.map(event => {
+        if (event.id === data.id) {
+            event.name = data.name
+            event.date = data.date
+            event.address = data.address
+            event.image = data.image
+            event.maker = data.maker
+            event.decs = data.decs
+            event.loc = data.loc
         }
 
-        return user
+        return event
     })
 }
 
-const deleteUser = async (id) => {
+const deleteEvent = async (id) => {
     loading.value = true
     try {
-        const response = await api.DELETE(`api/user/${id}`)
-        users.value = users.value.filter(i => i.id !== id)
-        alert('User Berhasil dihapus')
+        const response = await api.DELETE(`api/event/${id}`)
+        events.value = events.value.filter(i => i.id !== id)
+        alert('Event Berhasil dihapus')
     } catch (error) {
-        alert('Gagal Hapus User')
+        alert('Gagal Hapus Event')
     } finally {
         loading.value = false
-        getUsers()
+        getEvents()
     }
 }
 
-getUsers()
+getEvents()
     
 
 </script>

@@ -6,7 +6,7 @@
         <div class="wrapper">
             <div>
                 <div>
-                    <button class="btn" @click="refUserAdd.open()">
+                    <button class="btn" @click="refDestinationAdd.open()">
                         <fa-icon icon="fa-solid fa-user-plus"></fa-icon>
                     </button>
                 </div>
@@ -21,19 +21,19 @@
                         <th>Description</th>
                         <th>Action</th>
                     </template>
-                    <tr v-for="(destination, index) in users" :key="user.id">
+                    <tr v-for="(destination, index) in destinations" :key="dastination.id">
                         <td>{{ index+1 }}</td>
-                        <td>{{ destination.destinationName }}</td>
-                        <td>{{ destination.destinationTag }}</td>
-                        <td>{{ destination.destinationAddress }}</td>
-                        <td>{{ destination.destinationImage }}</td>
-                        <td>{{ destination.destinationLoc }}</td>
-                        <td>{{ destination.destinationDecs }}</td>
+                        <td>{{ destination.name }}</td>
+                        <td>{{ destination.tag }}</td>
+                        <td>{{ destination.address }}</td>
+                        <td>{{ destination.image }}</td>
+                        <td>{{ destination.loc }}</td>
+                        <td>{{ destination.decs }}</td>
                         <td class="cta">
-                            <button @click="refUserUpdate.open(user)">
+                            <button @click="refDestinationUpdate.open(destination)">
                                 <fa-icon icon="fa-solid fa-user-gear"></fa-icon>
                             </button>
-                            <button @click="deleteUser(user.id)">
+                            <button @click="deleteDestination(destination.id)">
                                 <fa-icon icon="fa-solid fa-trash"></fa-icon>
                             </button>
                         </td>
@@ -41,9 +41,9 @@
                 </app-table-component>
             </div>
             <div>
-                <user-update-view ref="refUserUpdate" @updated="userUpdated"/>
+                <destination-update-view ref="refDestinationUpdate" @updated="destinationUpdated"/>
             </div>
-            <user-add-view ref="refUserAdd" @created="users.push($event)"/>
+            <destination-add-view ref="refDestinationAdd" @created="destinations.push($event)"/>
         
         </div>
     </div>
@@ -52,52 +52,55 @@
 <script setup>
 import { ref } from 'vue';
 import AppTableComponent from '../../components/AppTableComponent.vue';
-import UserAddView from './UserAddView.vue';
-import UserUpdateView from './UserUpdateView.vue';
+import DestinationAddView from './DestinationAddView.vue';
+import DestinationUpdateView from './DestinationUpdateView.vue';
 import api from '../../functions/api'
 
-const refUserUpdate = ref()
-const refUserAdd = ref()
+const refDestinationUpdate = ref()
+const refDestinationAdd = ref()
 const loading = ref(false)
-const users = ref([])
+const destinations = ref([])
 
-const getUsers = async () => {
+const getDestinations = async () => {
     loading.value = true
     try {
-        const response = await api.GET('api/user')
-        users.value = response.data
+        const response = await api.GET('api/destination')
+        destinations.value = response.data
     } finally {
         loading.value = false
     }
 }
 
-const userUpdated = (data) => {
-    users.value = users.value.map(user => {
-        if (user.id === data.id) {
-            user.name = data.name
-            user.email = data.email
-            user.phone = data.phone
+const destinationUpdated = (data) => {
+    destinations.value = destinations.value.map(destination => {
+        if (destination.id === data.id) {
+            destination.name = data.name
+            destination.tag = data.tag
+            destination.address = data.address
+            destination.image = data.image
+            destination.loc = data.loc
+            destination.decs = data.decs
         }
 
-        return user
+        return destination
     })
 }
 
-const deleteUser = async (id) => {
+const deleteDestination = async (id) => {
     loading.value = true
     try {
-        const response = await api.DELETE(`api/user/${id}`)
-        users.value = users.value.filter(i => i.id !== id)
-        alert('User Berhasil dihapus')
+        const response = await api.DELETE(`api/destination/${id}`)
+        destinations.value = destinations.value.filter(i => i.id !== id)
+        alert('Destination Berhasil dihapus')
     } catch (error) {
-        alert('Gagal Hapus User')
+        alert('Gagal Hapus Destination')
     } finally {
         loading.value = false
-        getUsers()
+        getDestinations()
     }
 }
 
-getUsers()
+getDestinations()
 </script>
 
 <style scoped>
