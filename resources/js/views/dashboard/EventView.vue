@@ -4,12 +4,101 @@
             INI EVENT DASHBOARD
         </div>
         <div class="wrapper">
-        
+            <div>
+                <div>
+                    <button class="btn" @click="refUserAdd.open()">
+                        <fa-icon icon="fa-solid fa-user-plus"></fa-icon>
+                    </button>
+                </div>
+                <app-table-component>
+                    <template #head>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Date</th>
+                        <th>Address</th>
+                        <th>Image</th>
+                        <th>Created By</th>
+                        <th>Description</th>
+                        <th>Action</th>
+                    </template>
+                    <tr v-for="(event, index) in users" :key="event.id">
+                        <td>{{ index+1 }}</td>
+                        <td>{{ event.eventName }}</td>
+                        <td>{{ event.eventDate }}</td>
+                        <td>{{ event.eventAddress }}</td>
+                        <td>{{ event.eventImage }}</td>
+                        <td>{{ event.eventMaker }}</td>
+                        <td>{{ event.eventDecs }}</td>
+                        <td>{{ event.eventLoc }}</td>
+                        <td class="cta">
+                            <button @click="refUserUpdate.open(user)">
+                                <fa-icon icon="fa-solid fa-user-gear"></fa-icon>
+                            </button>
+                            <button @click="deleteUser(user.id)">
+                                <fa-icon icon="fa-solid fa-trash"></fa-icon>
+                            </button>
+                        </td>
+                    </tr>
+                </app-table-component>
+            </div>
+            <div>
+                <user-update-view ref="refUserUpdate" @updated="userUpdated"/>
+            </div>
+            <user-add-view ref="refUserAdd" @created="users.push($event)"/>
         </div>
     </div>
 </template>
 
 <script setup>
+import { ref } from 'vue';
+import AppTableComponent from '../../components/AppTableComponent.vue';
+import UserAddView from './UserAddView.vue';
+import UserUpdateView from './UserUpdateView.vue';
+import api from '../../functions/api'
+
+const refUserUpdate = ref()
+const refUserAdd = ref()
+const loading = ref(false)
+const users = ref([])
+
+const getUsers = async () => {
+    loading.value = true
+    try {
+        const response = await api.GET('api/user')
+        users.value = response.data
+    } finally {
+        loading.value = false
+    }
+}
+
+const userUpdated = (data) => {
+    users.value = users.value.map(user => {
+        if (user.id === data.id) {
+            user.name = data.name
+            user.email = data.email
+            user.phone = data.phone
+        }
+
+        return user
+    })
+}
+
+const deleteUser = async (id) => {
+    loading.value = true
+    try {
+        const response = await api.DELETE(`api/user/${id}`)
+        users.value = users.value.filter(i => i.id !== id)
+        alert('User Berhasil dihapus')
+    } catch (error) {
+        alert('Gagal Hapus User')
+    } finally {
+        loading.value = false
+        getUsers()
+    }
+}
+
+getUsers()
+    
 
 </script>
 
@@ -35,4 +124,49 @@
     width: 100%;
     overflow-y: auto;
 }
+
+.btn {
+    padding: .5rem .8rem;
+    margin-bottom: .125rem;
+    background: #526CEB;
+    color: #F8F4EA;
+    border-radius: .275rem;
+    font-size: .8rem;
+    font-weight: bold;
+}
+.cta {
+    pointer-events: visible;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+th, td {
+    padding: .3rem;
+    text-align: center;
+    pointer-events: none;
+}
+
+th {
+    text-align: center;
+    background: #526CEB;
+    color: #F8F4EA;
+    border-bottom: 2px solid #1D3C58;
+    text-transform: uppercase;
+}
+td:nth-child(5) {
+    text-transform: uppercase;
+}
+tr {
+    border-bottom: 1px solid #1D3C58;
+}
+tr{
+    background: #F5EBE0;
+    color: #1D3C58;
+}
+tr.admin-role {
+    background: #F0DBDB;
+    color: #1D3C58;
+}
+
 </style>
