@@ -41,3 +41,4 @@ Route::controller(UserController::class)->prefix('user')
     Route::put('{id?}', 'update')->name('user.update');
     Route::delete('{id?}', 'destroy')->name('user.destroy');
 });
+

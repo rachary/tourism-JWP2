@@ -41,7 +41,7 @@ const destinations = ref([
     {
         tag: 'Museum',
         imageUrl: 'https://tourism.surabaya.go.id/storage/tour/1648709900_1.jpg',
-        name: 'Museum Pendidikan Surabaya',
+        name: 'Isi Pendidikan Surabaya',
         address: 'Jl. Genteng Kali No. 10'
     },
     {
