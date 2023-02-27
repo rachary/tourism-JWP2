@@ -26,15 +26,18 @@
                         <td>{{ user.phone }}</td>
                         <td>{{ user.user_role_id }}</td>
                         <td class="cta">
-                            <button>
+                            <button @click="refUserUpdate.open(user)">
                                 <fa-icon icon="fa-solid fa-user-gear"></fa-icon>
                             </button>
-                            <button>
+                            <button @click="deleteUser(user.id)">
                                 <fa-icon icon="fa-solid fa-trash"></fa-icon>
                             </button>
                         </td>
                     </tr>
                 </app-table-component>
+            </div>
+            <div>
+                <user-update-view ref="refUserUpdate" @updated="userUpdated"/>
             </div>
             <user-add-view ref="refUserAdd" @created="users.push($event)"/>
         </div>
@@ -45,8 +48,10 @@
 import { ref } from 'vue';
 import AppTableComponent from '../../components/AppTableComponent.vue';
 import UserAddView from './UserAddView.vue';
+import UserUpdateView from './UserUpdateView.vue';
 import api from '../../functions/api'
 
+const refUserUpdate = ref()
 const refUserAdd = ref()
 const loading = ref(false)
 const users = ref([])
@@ -56,12 +61,39 @@ const getUsers = async () => {
     try {
         const response = await api.GET('api/user')
         users.value = response.data
-        console.log(response)
     } finally {
         loading.value = false
     }
 }
+
+const userUpdated = (data) => {
+    users.value = users.value.map(user => {
+        if (user.id === data.id) {
+            user.name = data.name
+            user.email = data.email
+            user.phone = data.phone
+        }
+
+        return user
+    })
+}
+
+const deleteUser = async (id) => {
+    loading.value = true
+    try {
+        const response = await api.DELETE(`api/user/${id}`)
+        users.value = users.value.filter(i => i.id !== id)
+        alert('User Berhasil dihapus')
+    } catch (error) {
+        alert('Gagal Hapus User')
+    } finally {
+        loading.value = false
+        getUsers()
+    }
+}
+
 getUsers()
+    
 </script>
 
 <style scoped>
@@ -115,14 +147,17 @@ th {
     border-bottom: 2px solid #1D3C58;
     text-transform: uppercase;
 }
+td:nth-child(5) {
+    text-transform: uppercase;
+}
 tr {
     border-bottom: 1px solid #1D3C58;
 }
-tr:nth-child(odd) {
+tr{
     background: #F5EBE0;
     color: #1D3C58;
 }
-tr:nth-child(even) {
+tr.admin-role {
     background: #F0DBDB;
     color: #1D3C58;
 }

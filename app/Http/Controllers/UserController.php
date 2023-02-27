@@ -17,7 +17,7 @@ class UserController extends Controller
     public function index(): ApiCollection
     {
         
-        $user = User::paginate();
+        $user = User::with(['userRole'])->paginate();
 
         return new ApiCollection($user);
     }
@@ -42,13 +42,14 @@ class UserController extends Controller
         return $user;
     }
 
-    // /**
-    //  * Display the specified resource.
-    //  */
-    // public function show(User $user)
-    // {
-    //     //
-    // }
+    /**
+     * Display the specified resource.
+     */
+    public function show($id)
+    {
+        $user = User::find($id);
+        return $user;
+    }
 
     // /**
     //  * Show the form for editing the specified resource.
@@ -58,19 +59,33 @@ class UserController extends Controller
     //     //
     // }
 
-    // /**
-    //  * Update the specified resource in storage.
-    //  */
-    // public function update(Request $request, User $user)
-    // {
-    //     //
-    // }
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(UserRequest $request, User $user, $id)
+    {
+        $validated = $request->validated();
+        
+        $user = User::find($id);
+        $user->name = $validated['name'];
+        $user->email = $validated['email'];
+        $user->password = bcrypt($validated['password']);
+        $user->phone = $validated['phone'];
 
-    // /**
-    //  * Remove the specified resource from storage.
-    //  */
-    // public function destroy(User $user)
-    // {
-    //     //
-    // }
+        $role = UserRole::firstWhere('name', $validated['role']);
+        $user->user_role_id = $role->id;
+        $user->save();
+
+        return $user;
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy($id)
+    {
+        $user = User::find($id);
+        $user->delete();
+        return $user;
+    }
 }

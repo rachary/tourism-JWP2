@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('destinationImage');
             $table->string('destinationLoc');
             $table->string('destinationDecs');
+
         });
     }
 

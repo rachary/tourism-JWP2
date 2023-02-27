@@ -23,11 +23,32 @@ class UserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'=>'required|string|max:255',
-            'email'=>'required|string|email|max:255',
-            'password'=>'required|string|max:255',
-            'phone'=>'required|string|max:255',
+            'name'=>'required|string|min:3|max:255',
+            'email'=>'required|string|unique:users|email|max:255',
+            'password'=>'required|string|min:5|max:255',
+            'phone'=>'required|numeric|string',
             'role'=>'required|in:'.join(',', [UserRole::ADMINISTRATOR, UserRole::CONTRIBUTOR]),
+        ];
+    }
+
+     /**
+     * Show error message
+     * 
+     */
+    public function messages()
+    {
+        return [
+            'name.required' => 'Nama tidak boleh kosong',
+            'name.min' => 'Nama minimal 3 karakter',
+            'name.max' => 'Nama maksimal 255 karakter',
+            'email.required' => 'Email tidak boleh kosong',
+            'email.email' => 'Email tidak valid',
+            'email.unique' => 'Email sudah digunakan',
+            'password.required' => 'Nama tidak boleh kosong',
+            'password.min' => 'Password minimal 5 karakter',
+            'password.max' => 'Password maksimal 255 karakter',
+            'phone.required' => 'Nomor hp harus diisi',
+            'phone.numeric' => 'Nomor hp harus memakai numerik',
         ];
     }
 }

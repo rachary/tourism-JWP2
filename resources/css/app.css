@@ -9,9 +9,15 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Gugi', cursive;
+    scroll-behavior: smooth;
+    outline: none;
 }
 .wrap {
     padding: 0 1rem;
+}
+section {
+    width: 100%;
+    min-height: 100vh;
 }
 a {
     text-decoration: none;
@@ -21,106 +27,19 @@ ul {
     list-style-type: none;
 }
 
-body {
-    margin: 0;
-    font-family: "Open Sans", sans-serif;
-  }
-  
-  .box-icon {
-    display: flex;
-    flex-wrap: wrap;
-    width: 50%;
-    margin: 0 auto;
-    text-align: center;
-    font-size: 15px;
-    font-weight: bold;
-  }
-  
-  .icon {
-    flex: 150px;
-    color: #6868ac;
-    text-align: center;
-  }
-  
-  .icon img {
-    width: 55px;
-    height: auto;
-    margin-bottom: -10px;
-  }
-  .grid-container {
-    padding: 0 10% 0 10%;
-    text-align: center;
-  }
-  
-  .grid-item-left {
-    float: left;
-  
-    text-align: left;
-  }
-  
-  .grid-item-left h1 {
-    margin: 0;
-    color: #ff9800;
-    font-weight: 800;
-    font-size: 22px;
-    font-size: 22px;
-    font-weight: 800;
-  }
-  
-  .grid-item-left h2 {
-    margin: 0;
-  
-    color: #039be5;
-    font-weight: 800;
-    font-size: 22px;
-  }
-  
-  .grid-item-right {
-    margin: 0;
-    float: right;
-    padding: 10px;
-    text-align: right;
-  }
-  
-  .grid-item-right img {
-    width: 50%;
-  }
-  
-  .video-container {
-    position: relative;
-    text-align: center;
-  }
-  
-  video {
-    width: 100%;
-    margin: 0;
-    text-align: center;
-  }
-  
-  .overlay-text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
-    font-size: 20px;
-    text-align: center;
-  }
-  
-  .clickable-box {
-    width: auto;
-    background-color: #6868ac;
-    text-align: center;
-    padding: 10px;
-    display: inline-block;
-  
-    border-radius: 5px;
-    box-shadow: 10px 10px 5px black;
-  }
-  
-  .clickable-box h3 {
-    color: white;
-    font-size: 19px;
-    margin: 0;
-  }
-  
+::-webkit-scrollbar {
+   width: .5rem; 
+}
+::-webkit-scrollbar-track {
+    border-radius: .5rem;
+    background-color: #e7e7e7;
+    border: 1px solid #cacaca;
+    box-shadow: insert 0 0 .45rem rgba(0, 0, 0, .3);
+}
+::-webkit-scrollbar-thumb {
+    border-radius: .5rem;
+    background: #555;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #333;
+}

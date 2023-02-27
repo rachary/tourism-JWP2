@@ -3,7 +3,7 @@
         <div class="upper">
             <div class="profile">
                 <img src="https://picsum.photos/50/50" alt="">
-                <h2>Name</h2>
+                <h2></h2>
             </div>
             <a href="#">
                 <fa-icon icon="fa-solid fa-gear"/>
@@ -12,7 +12,7 @@
         <div class="bottom">
             <nav>
                 <ul class="nav-list">
-                    <li class="label-item">Halaman Dashboard</li>
+                    <li class="label-item">Dashboard</li>
                     <li class="nav-item">
                         <router-link :to="{name: 'dashboarduser'}">
                             <a class="nav-link" :class="{'nav-link-current-active-user': $route.name === 'dashboarduser'}">
@@ -37,7 +37,7 @@
                             </a>
                         </router-link>
                     </li>
-                    <li class="label-item">Halaman App</li>
+                    <li class="label-item">App</li>
                     <li class="nav-item">
                         <router-link :to="{name: 'appdestination'}">
                             <a class="nav-link" :class="{'nav-link-current-active-appdestination': $route.name === 'appdestination'}">
@@ -54,6 +54,7 @@
                             </a>
                         </router-link>
                     </li>
+                    <button @click="handleLogout">Logout</button>
                 </ul>
             </nav>
         </div>
@@ -61,7 +62,25 @@
 </template>
 
 <script setup>
+import { ref } from 'vue';
+import api from '../../functions/api';
+import router from '../../routes'
 
+const isAuthenticated = ref(true)
+const users = ref([])
+const loading = ref(false)
+
+const getAuthenticated = () => {
+
+}
+
+const getUsers = () => {
+
+}
+
+const handleLogout = () => {
+
+}
 </script>
 
 <style scoped>
