@@ -1,5 +1,5 @@
 <?php
-
+// Tempat Pangaturan Auth Account
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
