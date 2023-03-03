@@ -194,4 +194,11 @@ li a:hover:after {
 }
 </style>
 
-module.export = Content2Component
+export default {
+    name: 'Content2Component',  
+    data(){
+        return{
+
+        }
+    }
+}

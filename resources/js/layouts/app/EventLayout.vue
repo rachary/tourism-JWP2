@@ -3,19 +3,19 @@
         <div style="margin: 10px 20px">
             <a style="" href="">
                 <div class="hover-zoom">
-                    <img :src="destination.imageUrl" alt="">
+                    <img :src="event.imageUrl" alt="">
                 </div>
-                <h6>{{ destination.tag }}</h6>
-                <h5>{{ destination.name }}</h5>
-                <p><span><fa-icon style="font-size:18px;margin-right:5px;" icon="fa-solid fa-location-dot" /></span> {{
-                    destination.address }}</p>
+                <h6>{{ event.name }}</h6>
+                <h5>{{ event.startdate }}</h5>
+                <h5>{{ event.enddate }}</h5>
+
             </a>
         </div>
     </div>
 </template>
 
 <script setup>
-const props = defineProps({ destination: Object })
+const props = defineProps({ event: Object })
 
 </script>
 

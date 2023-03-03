@@ -34,6 +34,8 @@
 </template>
 
 <script setup>
+
+
 import NavbarComponent from '../../components/NavbarComponent.vue';
 import Content1Component from '../../components/Content1Component.vue';
 import Content2Component from '../../components/Content2Component.vue';

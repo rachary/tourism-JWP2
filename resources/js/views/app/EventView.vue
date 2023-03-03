@@ -1,7 +1,7 @@
 <template>
     <section>
         <div class="wrap">
-            <h1 class="headline">DESTINASI WISATA</h1>
+            <h1 class="headline">EVENT SURABAYA</h1>
             <div class="menu-cta">
                 <div class="menu-search">
                     <input v-if="showSearch" v-focus type="text" v-model="searchName" placeholder="Tujuan anda ke..." />
@@ -13,16 +13,25 @@
             </div>
             <div class="menu-cta">
                 <div class="menu-search">
-                    <input v-if="showSearch" v-focus type="text" v-model="searchDate" placeholder="Tujuan anda ke..." />
+                    <input v-if="showSearch" v-focus type="text" v-model="searchStartDate" placeholder="00-00-00" />
                     <button class="search-btn" @click="showSearch = !showSearch">
                         <fa-icon icon="fa-solid fa-magnifying-glass" />
-                        Tanggal Event
+                        Mulai Event
                     </button>
                 </div>
             </div>
-            <div class="content-destination">
-                <div style="" v-for="destination in searchDestinations" :key="destination.name">
-                    <DestinationLayout :destination="destination" />
+            <div class="menu-cta">
+                <div class="menu-search">
+                    <input v-if="showSearch" v-focus type="text" v-model="searchEndDate" placeholder="00-00-00" />
+                    <button class="search-btn" @click="showSearch = !showSearch">
+                        <fa-icon icon="fa-solid fa-magnifying-glass" />
+                        Selesai Event
+                    </button>
+                </div>
+            </div>
+            <div class="content-event">
+                <div style="" v-for="event in searchEvents" :key="event.name">
+                    <EventLayout :event="event" />
                 </div>
             </div>
         </div>
@@ -31,118 +40,40 @@
 </template>
 
 <script setup>
-import DestinationLayout from '../../layouts/app/DestinationLayout.vue';
+import EventLayout from '../../layouts/app/EventLayout.vue';
 import { computed, onUpdated, ref } from 'vue';
 
 const searchName = ref('')
-const searchDate = ref('')
-const selectedTag = ref('')
+const searchStartDate = ref('')
+const searchEndDate = ref('')
+const selectedNam = ref('')
 const showSearch = ref(false)
 
 
-const destinations = ref([
+const event = ref([
     {
-        tag: 'Museum',
-        imageUrl: 'https://tourism.surabaya.go.id/storage/tour/1648709900_1.jpg',
-        name: 'Isi Pendidikan Surabaya',
-        date: '28-05-2023'
-    },
-    {
-        tag: 'Museum',
         imageUrl: 'https://tourism.surabaya.go.id/storage/tour/1648710891_1.jpg',
-        name: 'Museum Olahraga Surabaya',
-        address: 'Jl. Indragiri No.6, Gelora Pancasila'
+        name: 'Konser raisa',
+        startdate: '28-05-2023',
+        enddate: '30-05-2023'
+
     },
     {
-        tag: 'Museum',
-        imageUrl: 'https://tourism.surabaya.go.id/storage/tour/1652779387_1.jpg',
-        name: 'Gedung Nasional Indonesia (GNI) & Museum Dr. Soetomo',
-        address: 'JL Bubutan no 85 - 87'
+        imageUrl: 'https://tourism.surabaya.go.id/storage/tour/1648710891_1.jpg',
+        name: 'Konser afgan',
+        startdate: '19-05-2023',
+        enddate: '10-05-2023'
+
     },
-    {
-        tag: 'Museum',
-        imageUrl: 'https://tourism.surabaya.go.id/storage/tour/1652779620_1.jpg',
-        name: 'Museum Blockbuster',
-        address: 'Jl. Raya Kenjeran 463-465'
-    },
-    {
-        tag: 'Museum',
-        imageUrl: 'https://tourism.surabaya.go.id/storage/tour/1652777982_1.jpg',
-        name: 'Monumen Kapal Selam',
-        address: 'Jl. Pemuda no. 39'
-    },
-    {
-        tag: 'Kuliner',
-        imageUrl: 'https://tourism.surabaya.go.id/storage/tour/1653019735_1.jpg',
-        name: 'G Walk Citraland',
-        address: 'Ruko Taman Gapura Jl. Niaga Gapura'
-    },
-    {
-        tag: 'Kuliner',
-        imageUrl: 'https://tourism.surabaya.go.id/storage/tour/1654139851_1.jpg',
-        name: 'Sentra Ikan Bulak',
-        address: 'Jl. Sukolilo 7 no.24, Surabaya'
-    },
-    {
-        tag: 'Taman',
-        imageUrl: 'https://tourism.surabaya.go.id/storage/tour/1654137105_1.jpg',
-        name: 'Taman Bungkul',
-        address: 'Jl. Taman Bungkul, Darmo'
-    },
-    {
-        tag: 'Taman',
-        imageUrl: 'https://tourism.surabaya.go.id/storage/tour/1648713405_1.jpg',
-        name: 'Kebun Binatang Surabaya',
-        address: 'Jl. Setail No. 1, Darmo, Wonokromo'
-    },
-    {
-        tag: 'Taman',
-        imageUrl: 'https://tourism.surabaya.go.id/storage/tour/1654136213_1.jpg',
-        name: 'Taman Hiburan Pantai (THP) Kenjeran',
-        address: 'Jl. Pantai Lama Kenjeran no. 1'
-    },
-    {
-        tag: 'Sport',
-        imageUrl: 'https://tourism.surabaya.go.id/storage/tour/1652844832_1.jpg',
-        name: 'Stadion Gelora Bung Tomo (GBT)',
-        address: 'Benowo, Pakal, Surabaya'
-    },
-    {
-        tag: 'Sport',
-        imageUrl: 'https://tourism.surabaya.go.id/storage/tour/1652844613_1.jpg',
-        name: 'Lapangan Hockey - Softball',
-        address: 'Jl. Lap. Dharmawangsa no. 56'
-    },
-    {
-        tag: 'Sport',
-        imageUrl: 'https://tourism.surabaya.go.id/storage/tour/1652844761_1.jpg',
-        name: 'Gelora Pancasila',
-        address: 'Jl. Indragiri no. 6'
-    },
-    {
-        tag: 'Cagar Budaya',
-        imageUrl: 'https://tourism.surabaya.go.id/storage/tour/1654761532_1.jpg',
-        name: 'Gereja Katolik Kelahiran Santa Perawan Maria',
-        address: 'Jl. Kepanjen 4-6'
-    },
-    {
-        tag: 'Cagar Budaya',
-        imageUrl: 'https://tourism.surabaya.go.id/storage/tour/1655198364_1.jpg',
-        name: 'Jembatan Merah Arcade',
-        address: 'Jl. Jembatan Merah 2'
-    },
-    {
-        tag: 'Cagar Budaya',
-        imageUrl: 'https://tourism.surabaya.go.id/storage/tour/1655194124_1.jpg',
-        name: 'Makam Al Habib Muhammad Bin Idrus Al Habsyi',
-        address: 'Jl. Ampel Gubah Lor'
-    },
+
 ])
 
-const searchDestinations = computed(() => {
-    return destinations.value
-        .filter(destination => selectedTag.value === '' || destination.tag === selectedTag.value)
-        .filter(destination => destination.name.toLowerCase().includes(searchName.value.toLowerCase()))
+const searchEvents = computed(() => {
+    return event.value
+        .filter(event => selectedNam.value === '' || event.name === selectedNam.value)
+        .filter(event => event.name.toLowerCase().includes(searchName.value.toLowerCase()))
+        .filter(event => event.startdate.toLowerCase().includes(searchStartDate.value.toLowerCase()))
+        .filter(event => event.enddate.toLowerCase().includes(searchEndDate.value.toLowerCase()))
 })
 
 </script>
@@ -210,7 +141,7 @@ select option:hover {
     filter: brightness(150%);
 }
 
-.content-destination {
+.content-event {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -238,10 +169,5 @@ select option:hover {
         justify-content: center;
     }
 
-    .responsive-div select option {
-        width: min-content;
-        display: inline-block;
-        text-align: center;
-        justify-content: center;
-    }
+
 }</style>
