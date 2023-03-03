@@ -97,3 +97,8 @@ a:hover:after {
     }
 }
 </style>
+
+
+
+module.export = NavbarComponent;
+export default NavbarComponent;

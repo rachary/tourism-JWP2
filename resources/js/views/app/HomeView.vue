@@ -1,4 +1,9 @@
 <template>
+   
+    <section>
+        INI HOME VIEW
+       
+    </section>
     <div style="">
         <div style="">
             <!-- Navigation Bar -->
@@ -29,11 +34,11 @@
 </template>
 
 <script setup>
-import NavbarComponent from '../components/NavbarComponent.vue';
-import Content1Component from '../components/Content1Component.vue';
-import Content2Component from '../components/Content2Component.vue';
-import Content3Component from '../components/Content3Component.vue';
-import FooterComponent from '../components/FooterComponent.vue';
+import NavbarComponent from '../../components/NavbarComponent.vue';
+import Content1Component from '../../components/Content1Component.vue';
+import Content2Component from '../../components/Content2Component.vue';
+import Content3Component from '../../components/Content3Component.vue';
+import FooterComponent from '../../components/FooterComponent.vue';
 </script>
 
 <style scoped>
@@ -49,5 +54,10 @@ li a{
     gap: 5px;
     text-decoration: none;
     color: black;
+}
+
+section {
+    width: 100%;
+    min-height: 100vh;
 }
 </style>

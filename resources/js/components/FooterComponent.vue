@@ -106,3 +106,5 @@ ul li p {
     
 }
 </style>
+
+module.export = FooterComponent

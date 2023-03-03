@@ -128,3 +128,6 @@ li a:hover:after {
 }
 }
 </style>
+
+module.export = Content1Component;
+export default Content1Component

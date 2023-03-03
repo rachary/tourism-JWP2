@@ -193,3 +193,5 @@ li a:hover:after {
 }
 }
 </style>
+
+module.export = Content2Component
