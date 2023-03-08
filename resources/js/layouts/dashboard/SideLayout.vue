@@ -3,7 +3,7 @@
         <div class="upper">
             <div class="profile">
                 <img src="https://picsum.photos/50/50" alt="">
-                <h2></h2>
+                <h2>{{ users }}</h2>
             </div>
             <a href="#">
                 <fa-icon icon="fa-solid fa-gear"/>
@@ -75,12 +75,16 @@ const getAuthenticated = () => {
 }
 
 const getUsers = () => {
-
+    users.value = localStorage.getItem('username')
 }
 
 const handleLogout = () => {
-
+    localStorage.removeItem('username');
+    localStorage.removeItem('userrole');
+    router.replace({name: 'login'});
 }
+
+getUsers()
 </script>
 
 <style scoped>

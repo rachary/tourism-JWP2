@@ -14,7 +14,7 @@ class UserRole extends Model
     ];
 
     /**
-     * Get all users
+     * Relation with table User
      * 
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */

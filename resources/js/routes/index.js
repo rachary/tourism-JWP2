@@ -21,13 +21,14 @@ const router = createRouter({
                 {
                     path: 'event',
                     name: 'event',
-                    component: () => import('../views/app/DestinationView.vue')
+                    component: () => import('../views/app/EventView.vue')
                 },
             ],
         },
         {
             path: '/dashboard',
             component: () => import('../layouts/dashboard/DashboardIndexLayout.vue'),
+            meta: { requiresAuth: true },
             children: [
                 {
                     path: '',
@@ -64,4 +65,22 @@ const router = createRouter({
     ]
 })
 
+router.beforeEach((to, from, next) => {
+    const username = localStorage.getItem('username');
+    if (to.path === '/login') {
+        if (username) {
+            next('/dashboard');
+        } else {
+            next();
+        }
+    } else if (to.matched.some(record => record.meta.requiresAuth)) {
+        if (!username) {
+            next('/login');
+        } else {
+            next();
+        }
+    } else {
+        next();
+    }
+})
 export default router;

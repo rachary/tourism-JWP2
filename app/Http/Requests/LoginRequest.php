@@ -22,8 +22,39 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => 'required|string|email',
-            'password' => 'required|string'
+            'email'=>'required|email',
+            'password'=>'required',
         ];
     }
+
+    /**
+     * Show error messages
+     * 
+     */
+    public function messages()
+    {
+        return [
+            'email.required'=>'Email tidak boleh kosong',
+            'email.email'=>'Format email Salah ex: email@email.com',
+            'password.required'=>'Password tidak boleh kosong',
+        ];
+    }
+
+    // /**
+    //  * Get authorization credentials from the request
+    //  * 
+    //  */
+    // public function getCredentials()
+    // {
+    //     $email = $this->get('email');
+
+    //     if ($this->isEmail($email)) {
+    //         return [
+    //             'email' => $email,
+    //             'password' => $this->get('password')
+    //         ];
+    //     }
+
+    //     return $this->only('username', 'password');
+    // }
 }
