@@ -1,7 +1,9 @@
 <template>
-    <div class="wrap">
-        INI EVENT VIEW
-    </div>
+    <section>
+        <div class="wrap">
+            INI EVENT
+        </div>
+    </section>
 </template>
 
 <script setup>
