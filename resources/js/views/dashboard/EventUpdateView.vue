@@ -62,19 +62,16 @@ const submitting = ref(false)
 const errors = ref({})
 const form = reactive({
     name: '',
-    email: '',
-    password: '',
-    phone: '',
-    role: '',
+    date: '',
+    address: '',
+    image: '',
+    maker: '',
+    decs: '',
+    loc: '',
 })
 
 const open = (data) => {
     modal.value.open()
-    user.value = data
-    form.name = data.name
-    form.email = data.email
-    form.phone = data.phone
-    
 }
 const close = () => {
     modal.value.close()

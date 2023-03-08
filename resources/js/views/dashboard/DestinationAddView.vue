@@ -48,16 +48,17 @@
     import api from '../../functions/api';
     
     const emit = defineEmits(['created'])
-    const title = ref('Tambah Event Baru')
+    const title = ref('Tambah Destinasi Baru')
     const modal = ref()
     const submitting = ref(false)
     const errors = ref({})
     const form = reactive({
         name: '',
-        email: '',
-        password: '',
-        phone: '',
-        role: 'contributor',
+        tag: '',
+        address: '',
+        image: '',
+        loc: '',
+        decs: '',
     })
     
     const open = () => {

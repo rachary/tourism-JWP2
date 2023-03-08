@@ -57,14 +57,16 @@
     const modal = ref()
     const submitting = ref(false)
     const errors = ref({})
- /*   const form = reactive({
+    const form = reactive({
         name: '',
-        email: '',
-        password: '',
-        phone: '',
-        role: 'contributor',
+        date: '',
+        address: '',
+        image: '',
+        maker: '',
+        decs: '',
+        loc: '',
     })
-*/    
+    
     const open = () => {
         modal.value.open()
     }
@@ -81,11 +83,6 @@
             errors.value = api.formErrors(error)     
         } finally {
             submitting.value = false
-            form.value.name = ''
-            form.value.email = ''
-            form.value.password = ''
-            form.value.phone = ''
-            form.value.role = 'contributor'
         }
     }
     
