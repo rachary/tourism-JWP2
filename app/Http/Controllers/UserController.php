@@ -30,13 +30,14 @@ class UserController extends Controller
         $validated = $request->validated();
 
         $user = new User();
+
         $user->name = $validated['name'];
         $user->email = $validated['email'];
         $user->password = bcrypt($validated['password']);
         $user->phone = $validated['phone'];
 
         $role = UserRole::firstWhere('name', $validated['role']);
-        $user->user_role_id = $role->id;
+        $user->userRole()->associate($role);
         $user->save();
 
         return $user;
@@ -48,6 +49,7 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::find($id);
+        
         return $user;
     }
 
@@ -67,13 +69,15 @@ class UserController extends Controller
         $validated = $request->validated();
         
         $user = User::find($id);
+
         $user->name = $validated['name'];
         $user->email = $validated['email'];
         $user->password = bcrypt($validated['password']);
         $user->phone = $validated['phone'];
 
         $role = UserRole::firstWhere('name', $validated['role']);
-        $user->user_role_id = $role->id;
+        $user->userRole()->associate($role);
+        
         $user->save();
 
         return $user;
@@ -86,6 +90,7 @@ class UserController extends Controller
     {
         $user = User::find($id);
         $user->delete();
+
         return $user;
     }
 }

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\DestinationRequest;
 use App\Http\Resources\ApiCollection;
 use App\Models\DestinationImage;
+use App\Models\DestinationRegion;
 use App\Models\DestinationTag;
 use Illuminate\Http\Request;
 
@@ -31,20 +32,75 @@ class DestinationController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(DestinationRequest $request)
+    public function store(DestinationRequest $request): Destination
     {
         $validated = $request->validated();
 
+        
         $destination = new Destination();
         $destination->name = $validated['name'];
         $destination->address = $validated['address'];
         $destination->description = $validated['description'];
         $destination->location = $validated['location'];
-        $destination->destination_region_id = $validated['destination_region_id'];
+        
+        $region = DestinationRegion::firstWhere('id', $validated['destination_region_id']);
+        $destination->destinationRegion()->associate($region);
+        
         $destination->save();
 
+        $destination->destinationTags()->sync($validated['destination_tags']);
+        
+        $images = [];
+        foreach ($validated['destination_images'] as $image) {
+            $filename = $image->hashName();
+            $image->storeAs('public/destination_images', $filename);
 
-        $destination->destinationTags()->attach($validated['destination_tags']);
+            $destinationImage = new DestinationImage();
+            $destinationImage->filename = $filename;
+            $images[] = $destinationImage;
+        }
+        $destination->destinationImages()->saveMany($images);
+
+        return $destination;
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show($id)
+    {
+        $destination = Destination::find($id);
+        
+        return $destination;
+    }
+
+    // /**
+    //  * Show the form for editing the specified resource.
+    //  */
+    // public function edit(Destination $destination)
+    // {
+    //     //
+    // }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, Destination $destination, $id)
+    {
+        $validated = $request->validated();
+
+        $destination = Destination::find($id);
+        $destination->name = $validated['name'];
+        $destination->address = $validated['address'];
+        $destination->description = $validated['description'];
+        $destination->location = $validated['location'];
+        
+        $region = DestinationRegion::firstWhere('id', $validated['destination_region_id']);
+        $destination->destinationRegion()->associate($region);
+        
+        $destination->save();
+
+        $destination->destinationTags()->associate($validated['destination_tags']);
         
         $images = [];
         foreach ($validated['destination_images'] as $image) {
@@ -57,40 +113,17 @@ class DestinationController extends Controller
         }
         $destination->destinationImages()->saveMany($images);
 
-        return response()->json([
-            'message' => 'Destination created'
-        ], 201);
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Destination $destination)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Destination $destination)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Destination $destination)
-    {
-        //
+        return $destination;
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Destination $destination)
+    public function destroy($id)
     {
-        //
+        $destination = Destination::find($id);
+        $destination->delete();
+
+        return $destination;
     }
 }

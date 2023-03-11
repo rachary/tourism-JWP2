@@ -129,5 +129,109 @@ class DestinationSeeder extends Seeder
 
         $destination5->destinationTags()->attach([1, 6]);
         $destination5->destinationImages()->saveMany($destinationImage5);
+
+        /**
+         * Make Destination 6
+         */
+        $destination6 = Destination::create(
+            [
+                'name' => 'Taman Mozaik',
+                'address' => 'Jalan Wiyung Praja, Wiyung',
+                'description' => 'Destinasi wisata rekreasi berupa taman aktif di Surabaya berada di Jalan Wiyung Praja Surabaya. Taman Mozaik memiliki konsep berupa taman rekreasi aktif yang bertema mozaik warna warni. Aksen utama taman adalah keberadaan rumah berdinding mozaik berwarna-warni. Di taman ini pengunjung dapat memanfaatkan rumah mozaik tersebut untuk berswafoto sebagai latar belakangnya. Taman Mozaik ini memiliki luas lahan total 5100 meter persegi.',
+                'location' => 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3957.3468722778475!2d112.68776501427999!3d-7.314874573953803!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd7fd0d9be2bb81%3A0x95eabfcee4bd8013!2sTaman%20Mozaik!5e0!3m2!1sen!2sid!4v1678564271227!5m2!1sen!2sid',
+                'destination_region_id' => 3,
+            ]
+        );
+        $destinationImage6 = [
+            new DestinationImage(['filename' => 'https://tourism.surabaya.go.id/storage/tour/1654138693_1.jpg']),
+            new DestinationImage(['filename' => 'https://tourism.surabaya.go.id/storage/tour/1654138693_2.jpg']),
+            new DestinationImage(['filename' => 'https://tourism.surabaya.go.id/storage/tour/1654138693_3.jpg']),
+            new DestinationImage(['filename' => 'https://tourism.surabaya.go.id/storage/tour/1654138693_4.jpg']),
+            new DestinationImage(['filename' => 'https://tourism.surabaya.go.id/storage/tour/1654138693_5.jpg']),
+        ];
+
+        $destination6->destinationTags()->attach([1]);
+        $destination6->destinationImages()->saveMany($destinationImage6);
+
+        /**
+         * Make Destination 7
+         */
+        $destination7 = Destination::create(
+            [
+                'name' => 'Museum Blockbuster',
+                'address' => 'Jl. Raya Kenjeran 463-465',
+                'description' => 'Museum Blockbuster berdiri pada tahun 2018 dan memiliki lebih dari 3000 koleksi yang semuanya merupakan barang langka dan limited edition. Terdiri dari action figure, diorama, statue, movie props, koleksi boneka dan mainan lainnya.',
+                'location' => 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3957.939302658181!2d112.77738401427914!3d-7.247748773204653!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd7f92a3fda62c3%3A0x571a8893dca24a3c!2sBlockbuster%20Museum%20Surabaya!5e0!3m2!1sen!2sid!4v1678564610693!5m2!1sen!2sid',
+                'destination_region_id' => 4,
+            ]
+        );
+        $destinationImage7 = [
+            new DestinationImage(['filename' => 'https://tourism.surabaya.go.id/storage/tour/1652779620_1.jpg']),
+            new DestinationImage(['filename' => 'https://tourism.surabaya.go.id/storage/tour/1652779620_2.jpg']),
+            new DestinationImage(['filename' => 'https://tourism.surabaya.go.id/storage/tour/1652779620_3.jpg']),
+            new DestinationImage(['filename' => 'https://tourism.surabaya.go.id/storage/tour/1652779620_4.jpg']),
+        ];
+
+        $destination7->destinationTags()->attach([3]);
+        $destination7->destinationImages()->saveMany($destinationImage7);
+
+        /**
+         * Make Destination 8
+         */
+        $destination8 = Destination::create(
+            [
+                'name' => 'Golf Graha Family',
+                'address' => 'Jl. Raya Gold Graha Famili, Pradahkalikendal',
+                'description' => 'Golf Graha Family berstandar internasional dengan lokasi yang sangat strategis yaitu berada dekat dengan kompleks perumahan dan pusat perbelanjaan. Dibangun pada tahun 1995, Golf Graha Family memiliki 18 hole dengan par 72 dan panjang 6.210 meter didukung oleh deretan pohon palem, sungai, danau, kontur lahan berbukit dan berlembah, bunker beragam ukuran, dan beberapa jembatan serta pemandangan yang asri.',
+                'location' => 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3957.5158107396073!2d112.68303261427968!3d-7.295795473740112!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd7fc41180377d5%3A0x61267b31fea67129!2sGolf%20Graha%20Famili!5e0!3m2!1sen!2sid!4v1678564765802!5m2!1sen!2sid',
+                'destination_region_id' => 2,
+            ]
+        );
+        $destinationImage8 = [
+            new DestinationImage(['filename' => 'https://tourism.surabaya.go.id/storage/tour/1676969326_1.jpg']),
+        ];
+
+        $destination8->destinationTags()->attach([2]);
+        $destination8->destinationImages()->saveMany($destinationImage8);
+
+        /**
+         * Make Destination 9
+         */
+        $destination9 = Destination::create(
+            [
+                'name' => 'Kawasan Kaki Jembatan Suramadu',
+                'address' => 'Jl. Kedungcowek',
+                'description' => 'Jembatan Suramadu memiliki panjang 5.438m yang menghubungkan Pulau Jawa dan Pulau Madura. Dibangun pada 10 Juni 2009 dan menjadi salah satu ikon Jawa Timur. Jembatan ini berada di Kota Surabaya dengan daya Tarik wisata yang khas. Di sekitar kaki jembatan terdapat taman yang dilengkapi dengan jogging track dan playground. Menikmati pemandangan laut di pagi hari dari sini juga sangat menarik sambil olahraga atau sekedar jalan-jalan. 
+
+                Di malam hari suasana tak kalah menarik dengan pemandangan jembatan yang berhiaskan lampu warna-warni. Bila beruntung dapat dijumpai para atlet ski air dan olahraga lainnya di laut sekitaran Jembatan Suramadu.',
+                'location' => 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31666.581056219973!2d112.76590631084376!3d-7.203983848740364!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd7f843a29615f7%3A0x5c5fa161892c2cb9!2sCafe%20Bawah%20Jembatan%20Suramadu!5e0!3m2!1sen!2sid!4v1678565035816!5m2!1sen!2sid',
+                'destination_region_id' => 4,
+            ]
+        );
+        $destinationImage9 = [
+            new DestinationImage(['filename' => 'https://tourism.surabaya.go.id/storage/tour/1677035424_1.jpg']),
+        ];
+
+        $destination9->destinationTags()->attach([6, 7]);
+        $destination9->destinationImages()->saveMany($destinationImage9);
+
+        /**
+         * Make Destination 10
+         */
+        $destination10 = Destination::create(
+            [
+                'name' => 'Pasar Bunga Bratang',
+                'address' => 'Jl. Bratang Binangun',
+                'description' => 'Di sini menyimpan potensi wisata yang menarik dikunjungi. Sebab di Pasar Bratang memiliki dua ciri khas, yakni dikenal sebagai pasar burung, juga terkenal sebagai pasar bunga. Karena itu, Pasar Bratang ini kadang ada yang menyebutnya Pasar Burung Bratang, ada pula yang mengatakan Pasar Bunga Bratang. Pasar Bratang ini sudah berdiri sejak 1980-an.',
+                'location' => 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3957.4969084389077!2d112.75829031427962!3d-7.297932673764042!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd7fbad0fa91663%3A0x6df8cf5c70a06488!2sToko%20Bunga%20Ayu!5e0!3m2!1sen!2sid!4v1678565231407!5m2!1sen!2sid',
+                'destination_region_id' => 5,
+            ]
+        );
+        $destinationImage10 = [
+            new DestinationImage(['filename' => 'https://tourism.surabaya.go.id/storage/tour/1677042764_1.jpg']),
+        ];
+
+        $destination10->destinationTags()->attach([5]);
+        $destination10->destinationImages()->saveMany($destinationImage10);
     }
 }

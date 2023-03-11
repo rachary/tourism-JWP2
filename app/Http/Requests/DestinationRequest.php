@@ -30,7 +30,6 @@ class DestinationRequest extends FormRequest
             'destination_tags'=>'required|array|min:1',
             'destination_tags.*'=>'exists:destination_tags,id',
             'destination_images'=>'required|array',
-            'destination_images.*'=>'image|mimes:jpeg,png,jpg|max:2048', //maksimum 2 MB
             
         ];
     }
@@ -50,7 +49,6 @@ class DestinationRequest extends FormRequest
             'destination_region_id.required'=>'Region tidak boleh kosong',
             'destination_tags.required'=>'Tag tidak boleh kosong',
             'destination_images.required'=>'Gambar tidak boleh kosong',
-            'destination_images.max'=>'Ukuran Gambar maksimal 2MB',
 
         ];
     }
