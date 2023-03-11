@@ -16,12 +16,22 @@ const router = createRouter({
                 {
                     path: 'destination',
                     name: 'destination',
-                    component: () => import('../views/app/DestinationView.vue')
+                    component: () => import('../views/app/DestinationView.vue'),
+                },
+                {
+                    path: 'destination/:id',
+                    name: 'destinationdetail',
+                    component: () => import('../views/app/DestinationDetailView.vue'),
                 },
                 {
                     path: 'event',
                     name: 'event',
                     component: () => import('../views/app/EventView.vue')
+                },
+                {
+                    path: 'event/:id',
+                    name: 'eventdetail',
+                    component: () => import('../views/app/EventDetailView.vue')
                 },
             ],
         },
@@ -32,13 +42,13 @@ const router = createRouter({
             children: [
                 {
                     path: '',
-                    name: 'dashboarduser',
-                    component: () => import('../views/dashboard/UserView.vue')
-                },
-                {
-                    path: 'destinasi',
                     name: 'dashboarddestination',
                     component: () => import('../views/dashboard/DestinationView.vue')
+                },
+                {
+                    path: 'user',
+                    name: 'dashboarduser',
+                    component: () => import('../views/dashboard/UserView.vue')
                 },
                 {
                     path: 'event',
