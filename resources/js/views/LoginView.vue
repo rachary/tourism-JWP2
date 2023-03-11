@@ -47,7 +47,11 @@ const submit = async () => {
         localStorage.setItem('username', username)
         localStorage.setItem('userrole', userrole)
 
-        router.replace({name: 'dashboarduser'})
+        if(userrole==1) {
+            router.replace({name: 'dashboarduser'})
+        } else {
+            router.replace({name: 'dashboarddestination'})
+        }
     } catch (error) {
         errors.value = api.formErrors(error)
         alert('Email atau password salah')
