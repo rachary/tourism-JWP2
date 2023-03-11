@@ -3,7 +3,7 @@
         <div class="upper">
             <div class="profile">
                 <img src="https://picsum.photos/50/50" alt="">
-                <h2>{{ users }}</h2>
+                <h2>{{ user }}</h2>
             </div>
             <a href="#">
                 <fa-icon icon="fa-solid fa-gear"/>
@@ -13,7 +13,7 @@
             <nav>
                 <ul class="nav-list">
                     <li class="label-item">Dashboard</li>
-                    <li class="nav-item">
+                    <li class="nav-item" v-if="role == 1">
                         <router-link :to="{name: 'dashboarduser'}">
                             <a class="nav-link" :class="{'nav-link-current-active-user': $route.name === 'dashboarduser'}">
                                 <fa-icon class="icon" icon="fa-solid fa-user"/>
@@ -66,16 +66,10 @@ import { ref } from 'vue';
 import api from '../../functions/api';
 import router from '../../routes'
 
-const isAuthenticated = ref(true)
-const users = ref([])
-const loading = ref(false)
-
-const getAuthenticated = () => {
-
-}
-
+const user = ref([])
+const role = ref('')
 const getUsers = () => {
-    users.value = localStorage.getItem('username')
+    user.value = localStorage.getItem('username')
 }
 
 const handleLogout = () => {
@@ -83,7 +77,11 @@ const handleLogout = () => {
     localStorage.removeItem('userrole');
     router.replace({name: 'login'});
 }
+const getUserRole = () => {
+    role.value = localStorage.getItem('userrole')
+}
 
+getUserRole()
 getUsers()
 </script>
 

@@ -6,7 +6,7 @@
         <div class="wrapper">
             <div>
                 <div>
-                    <button class="btn" @click="refUserAdd.open()">
+                    <button class="btn" @click="refUserAdd.open(roles)">
                         <fa-icon icon="fa-solid fa-user-plus"></fa-icon>
                     </button>
                 </div>
@@ -24,9 +24,9 @@
                         <td>{{ user.name }}</td>
                         <td>{{ user.email }}</td>
                         <td>{{ user.phone }}</td>
-                        <td>{{ user.user_role_id }}</td>
+                        <td>{{ user.user_role.name }}</td>
                         <td class="cta">
-                            <button @click="refUserUpdate.open(user)">
+                            <button @click="refUserUpdate.open(user, roles)">
                                 <fa-icon icon="fa-solid fa-user-gear"></fa-icon>
                             </button>
                             <button @click="deleteUser(user.id)">
@@ -55,11 +55,22 @@ const refUserUpdate = ref()
 const refUserAdd = ref()
 const loading = ref(false)
 const users = ref([])
+const roles = ref([])
+
+const getUserRole = async () => {
+    loading.value = true
+    try {
+        const response = await api.GET('/api/user/role')
+        roles.value = response.data
+    } finally {
+        loading.value = false
+    }
+}
 
 const getUsers = async () => {
     loading.value = true
     try {
-        const response = await api.GET('api/user')
+        const response = await api.GET('/api/user')
         users.value = response.data
     } finally {
         loading.value = false
@@ -81,7 +92,7 @@ const userUpdated = (data) => {
 const deleteUser = async (id) => {
     loading.value = true
     try {
-        const response = await api.DELETE(`api/user/${id}`)
+        const response = await api.DELETE(`/api/user/${id}`)
         users.value = users.value.filter(i => i.id !== id)
         alert('User Berhasil dihapus')
     } catch (error) {
@@ -92,8 +103,8 @@ const deleteUser = async (id) => {
     }
 }
 
+getUserRole()
 getUsers()
-    
 </script>
 
 <style scoped>
@@ -147,9 +158,7 @@ th {
     border-bottom: 2px solid #1D3C58;
     text-transform: uppercase;
 }
-td:nth-child(5) {
-    text-transform: uppercase;
-}
+
 tr {
     border-bottom: 1px solid #1D3C58;
 }

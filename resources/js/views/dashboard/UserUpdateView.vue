@@ -25,9 +25,8 @@
                     </div>
                     <div class="row">
                         <label>Pilih Role:</label>
-                        <select v-model="form.role" class="form-input">
-                            <option value="contributor">Contributor</option>
-                            <option value="administrator">Administrator</option>
+                        <select v-model="form.role"  class="form-input">
+                            <option v-for="role in roles" :value="role.name" >{{ role.name }}</option>
                         </select>
                     </div>
                     <div class="row center">
@@ -49,6 +48,7 @@ const emit = defineEmits([ 'updated' ])
 const title = ref('Update Data User')
 const modal = ref()
 const user = ref()
+const roles = ref()
 
 const submitting = ref(false)
 const errors = ref({})
@@ -60,13 +60,15 @@ const form = reactive({
     role: '',
 })
 
-const open = (data) => {
+const open = (data, data2) => {
     modal.value.open()
+    
     user.value = data
+    roles.value = data2
     form.name = data.name
     form.email = data.email
     form.phone = data.phone
-    
+    form.role = data.user_role.name
 }
 const close = () => {
     modal.value.close()
@@ -77,6 +79,8 @@ const submit = async () => {
         const response = await api.PUT(`api/user/${user.value.id}`, form)
         emit('updated', response)
         close()
+        alert('User Updated')
+        location.reload()
     } catch (error) {
         errors.value = api.formErrors(error)
     } finally {

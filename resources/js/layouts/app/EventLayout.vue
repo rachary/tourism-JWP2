@@ -1,25 +1,25 @@
 <template>
     <div class="card">
         <div style="margin: 10px 20px">
-            <router-link :to="{ name: 'destinationdetail', params: {id: destination.id}}">
+            <router-link :to="{name: 'eventdetail', params: {id: event.id}}">
                 <div class="frame">
                     <div class="slider-frame">
-                        <div class="img-container" v-for="image in destination.destination_images">
+                        <div class="img-container" v-for="image in event.event_images">
                             <img :src="image.filename" alt="">
                         </div>
                     </div>
                 </div>
-                <div class="tagbox">
+                <!-- <div class="tagbox">
                     <div class="tag" v-for="tag in destination.destination_tags">
                         <h6>{{ tag.name }}</h6>
                     </div>
-                </div>
+                </div> -->
                 <div class="name">
-                    {{ destination.name }}
+                    {{ event.name }}
                 </div>
                 <div class="address">
                     <fa-icon class="icon" icon="fa-solid fa-location-dot"/>
-                    {{ destination.address }}
+                    {{ event.address }}
                 </div>
             </router-link>
         </div>
@@ -27,7 +27,7 @@
 </template>
 
 <script setup>
-const props = defineProps({ destination: Object })
+const props = defineProps({ event: Object })
 
 </script>
 
@@ -68,7 +68,6 @@ a .frame img {
     z-index: -1;
     overflow: hidden;
 }
-
 
 a .frame img:hover {
     transform: scale(1.5);
@@ -117,12 +116,13 @@ a p {
     text-align: center;
 }
 .address {
-    max-width: 15rem;
+    position: relative;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
     display: inline-block;
     text-align: center;
+    max-width: 15rem;
 }
 .icon {
     font-size:18px;
