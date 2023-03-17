@@ -1,7 +1,7 @@
 <template>
     <div class="wrap">
             <div class="header">
-                INI USER DASHBOARD
+                USER DASHBOARD
             </div>
         <div class="wrapper">
             <div>
@@ -102,7 +102,8 @@ const deleteUser = async (id) => {
         getUsers()
     }
 }
-
+const a = localStorage.getItem("userrole")
+console.log(a)
 getUserRole()
 getUsers()
 </script>

@@ -8,7 +8,6 @@ use App\Http\Requests\DestinationRequest;
 use App\Http\Resources\ApiCollection;
 use App\Models\DestinationImage;
 use App\Models\DestinationRegion;
-use App\Models\DestinationTag;
 use Illuminate\Http\Request;
 
 class DestinationController extends Controller
@@ -36,7 +35,6 @@ class DestinationController extends Controller
     {
         $validated = $request->validated();
 
-        
         $destination = new Destination();
         $destination->name = $validated['name'];
         $destination->address = $validated['address'];

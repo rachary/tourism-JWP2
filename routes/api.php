@@ -44,14 +44,12 @@ Route::controller(DestinationController::class)->prefix('destination')->group(fu
     Route::delete('{id?}', 'destroy')->name('destination.destroy');
 });
 
-
-
 Route::controller(EventController::class)->prefix('event')->group(function() {
     Route::get('', 'index')->name('event.index');
     Route::post('', 'store')->name('event.store');
-    // Route::get('{id?}', 'show')->name('event.show');
-    // Route::put('{id?}', 'update')->name('event.update');
-    // Route::delete('{id?}', 'destroy')->name('event.destroy');
+    Route::get('{id?}', 'show')->name('event.show');
+    Route::put('{id?}', 'update')->name('event.update');
+    Route::delete('{id?}', 'destroy')->name('event.destroy');
 });
 
 

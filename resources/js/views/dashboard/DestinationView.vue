@@ -1,7 +1,7 @@
 <template>
     <div class="wrap">
             <div class="header">
-                INI DESTINASI DASHBOARD
+                DESTINASI DASHBOARD
             </div>
         <div class="wrapper">
             <div>
@@ -47,7 +47,9 @@
                             </div>
                         </td>
                         <td class="cta mid">
-                            <button @click="refDestinationUpdate.open(destination)">
+                            <button 
+                            @click="refDestinationUpdate.open(destination, regions, tags)
+                            ">
                                 <fa-icon class="icon" icon="fa-solid fa-pen-to-square"></fa-icon>
                             </button>
                             <button v-if="role == 1" class="margin-left" @click="deleteDestination(destination.id)">
@@ -60,7 +62,7 @@
             <div>
                 <destination-update-view ref="refDestinationUpdate" @updated="destinationUpdated"/>
             </div>
-            <destination-add-view ref="refDestinationAdd" @created="users.push($event)"/>
+            <destination-add-view ref="refDestinationAdd" @created="destinations.push($event)"/>
         </div>
     </div>
 </template>
@@ -117,6 +119,10 @@ const getDestinations = async () => {
 const destinationUpdated = (data) => {
     destinations.value = destinations.value.map(destination => {
         if (destination.id === data.id) {
+            destination.name = data.name
+            destination.address = data.address
+            destination.description = data.description
+            destination.location = data.location
 
         }
 

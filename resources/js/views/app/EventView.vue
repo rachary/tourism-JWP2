@@ -3,17 +3,24 @@
         <div class="wrap">
             <h1 class="headline">EVENT SURABAYA</h1>
             <div class="menu-cta">
-                <!-- <select class="menu-select" v-model="selectedRegion">
-                    <option :value="null">Semua Region</option>
-                    <option v-for="region in regions" :value="region.id">{{ region.name }}</option>
-                </select>
-                <select class="menu-select" v-model="selectedTag">
-                    <option :value="null">Semua Tag</option>
-                    <option v-for="tag in tags" :value="tag.name">{{ tag.name }}</option>
-                </select> -->
+                <div class="menu-search">
+                    <button class="search-btn" @click="showDateStart = !showDateStart">
+                        <fa-icon icon="fa-solid fa-magnifying-glass" />
+                        Tanggal Mulai
+                    </button>
+                    <input v-if="showDateStart" class="date-input" type="date" v-model="searchDateStart">
+                </div>
+
+                <div class="menu-search">
+                    <button class="search-btn" @click="showDateEnd = !showDateEnd">
+                        <fa-icon icon="fa-solid fa-magnifying-glass" />
+                        Tanggal Selesai
+                    </button>
+                    <input v-if="showDateEnd" class="date-input" type="date" v-model="searchDateEnd">
+                </div>
             </div>
             <div class="content-event">
-                <div v-for="event in events" :key="event.id">
+                <div v-for="event in filteredEvents" :key="event.id">
                     <event-layout :event="event" />
                 </div>
             </div>
@@ -22,11 +29,15 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import api from '../../functions/api';
 import EventLayout from '../../layouts/app/EventLayout.vue'
 const loading = ref(false)
+const showDateStart = ref(false)
+const showDateEnd = ref(false)
 const events = ref([])
+const searchDateStart = ref('')
+const searchDateEnd = ref('')
 
 const getEvent = async () => {
     loading.value = true
@@ -37,6 +48,26 @@ const getEvent = async () => {
         loading.value = false
     }
 }
+
+const filteredEvents = computed(() => {
+    if (!searchDateStart.value || !searchDateEnd.value) {
+        return events.value;
+    }
+    
+    const dateStart = new Date(searchDateStart.value)
+    const dateEnd = new Date(searchDateEnd.value)
+
+    return events.value.filter((event) => {
+        const eventDateStart = new Date(event.date_start)
+        const eventDateEnd = new Date(event.date_end)
+
+        return (
+            eventDateStart >= dateStart && 
+            eventDateEnd <= dateEnd
+        )
+    })
+})
+
 getEvent()
 </script>
 
@@ -60,7 +91,7 @@ section {
 
 .menu-cta {
     display: flex;
-    justify-content: right;
+    justify-content: center;
     width: 100%;
     margin-top: 1rem;
     padding: .2rem 0;
@@ -69,10 +100,11 @@ section {
 
 .menu-search {
     display: flex;
+    flex-direction: column;
 }
 
 .menu-search input {
-    width: 45rem;
+    width: fit-content;
     background: #FFFFD2;
     padding: .225rem 1rem;
     color: #555;
@@ -84,7 +116,7 @@ section {
     background: #8AAAE4;
     padding: .225rem 1rem;
     color: white;
-    border-radius: 0 .5rem .5rem 0;
+    border-radius: .5rem;
 }
 
 .search-btn:focus,

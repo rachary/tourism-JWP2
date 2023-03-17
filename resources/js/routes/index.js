@@ -76,15 +76,35 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-    const username = localStorage.getItem('username');
-    if (to.path === '/login') {
-        if (username) {
+    const userrole = localStorage.getItem('userrole');
+
+    /**
+     * Route Guard for landing page and user
+     */
+    if(to.path === '/') {
+        if (userrole) {
             next('/dashboard');
         } else {
             next();
         }
+    } else if (to.path === '/dashboard/user') {
+        if (userrole == 1) {
+            next();
+        } else {
+            next('/dashboard')
+        }
+    } 
+    /**
+     * Route Guard for login
+     */
+    if (to.path === '/login') {
+        if (userrole) {
+            next('/dashboard');        
+        } else {
+            next();
+        }
     } else if (to.matched.some(record => record.meta.requiresAuth)) {
-        if (!username) {
+        if (!userrole) {
             next('/login');
         } else {
             next();
@@ -93,4 +113,5 @@ router.beforeEach((to, from, next) => {
         next();
     }
 })
+
 export default router;

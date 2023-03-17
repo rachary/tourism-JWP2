@@ -44,12 +44,10 @@ import AppModalComponent from '../../components/AppModalComponent.vue';
 import api from '../../functions/api';
 
 const emit = defineEmits([ 'updated' ])
-
 const title = ref('Update Data User')
 const modal = ref()
 const user = ref()
 const roles = ref()
-
 const submitting = ref(false)
 const errors = ref({})
 const form = reactive({
@@ -76,7 +74,7 @@ const close = () => {
 const submit = async () => {
     submitting.value = true
     try {
-        const response = await api.PUT(`api/user/${user.value.id}`, form)
+        const response = await api.PUT(`/api/user/${user.value.id}`, form)
         emit('updated', response)
         close()
         alert('User Updated')

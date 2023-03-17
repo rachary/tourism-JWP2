@@ -44,18 +44,19 @@
                             <div class="error" v-if="errors.destination_tags">{{ errors.destination_tags[0] }}</div>
                         </div>
                         <div class="row">
-                            <button @click="refDestinationImage.click()" type=button>
+                            <button class="preview-button" @click="refDestinationImage.click()" type=button>
                                 Pilih Gambar Destinasi:
                             </button>
-                            <img v-for="image in form.destination_images" 
-                            class="w-full h-full" :src="image.url">
+                            <div class="preview-img-box">
+                                <img class="preview-img" @click="removeImg" v-for="image in form.destination_images" :src="image.url">
+                            </div>
                             <input 
                             hidden 
                             ref="refDestinationImage"
                             id="idDestinationImage" 
                             type="file"
-                             multiple 
-                             @change="onFileChange">
+                            multiple 
+                            @change="onFileChange">
                             <div class="error" v-if="errors.destination_images">{{ errors.destination_images[0] }}</div>
                         </div>
                     </div>
@@ -75,6 +76,22 @@ import api from '../../functions/api';
 import dataURItoBlob from '../../functions/blob'
 
 const refDestinationImage = ref()
+const regions = ref([])
+const tags = ref([])
+const emit = defineEmits([ 'created' ])
+const title = ref('Tambah Destinasi Baru')
+const modal = ref()
+const submitting = ref(false)
+const errors = ref({})
+const form = reactive({
+    name: '',
+    address: '',
+    description: '',
+    destination_region_id: '',
+    location: '',
+    destination_tags: [],
+    destination_images: [],
+})
 
 const createImage = (file, index) => {
     if (typeof FileReader !== 'function') {
@@ -113,23 +130,6 @@ const createImage = (file, index) => {
     ctx.value = ''
   }
 
-const regions = ref([])
-const tags = ref([])
-const emit = defineEmits([ 'created' ])
-const title = ref('Tambah Destinasi Baru')
-const modal = ref()
-const submitting = ref(false)
-const errors = ref({})
-const form = reactive({
-    name: '',
-    address: '',
-    description: '',
-    destination_region_id: '',
-    location: '',
-    destination_tags: [],
-    destination_images: [],
-})
-
 const getFormData = () => {
     const formData = new FormData()
     formData.append('name', form.name)
@@ -164,6 +164,7 @@ const submit = async () => {
         const response = await api.POSTFORMDATA('/api/destination', getFormData())
         emit('created', response)
         close()
+        location.reload()
     } catch (error) {
         errors.value = api.formErrors(error)
         console.log(error)
@@ -312,5 +313,17 @@ button {
 
 .tag label, .tag label:before {
     transition: 0.25s all ease;
+}
+.preview-img-box {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .3rem;
+}
+.preview-button {
+    margin-bottom: .5rem;
+}
+.preview-img {
+    width: 5rem;
+    height: 5rem;
 }
 </style>
