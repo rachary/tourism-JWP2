@@ -37,6 +37,16 @@ class DestinationImage extends Model
     public $timestamps = false;
 
     /**
+     * Get image path.
+     * 
+     * @return string
+     */
+    public function imagePath()
+    {
+        return 'destination_images/';
+    }
+
+    /**
      * Generate image url.
      * 
      * @return \Illuminate\Database\Eloquent\Casts\Attribute
@@ -45,7 +55,7 @@ class DestinationImage extends Model
     {
         return new Attribute(
             get: function () {
-                return $this->filename ? Storage::url('destination_images/' . $this->filename) : null;
+                return $this->filename ? Storage::url($this->imagePath() . $this->filename) : null;
             },
         );
     }

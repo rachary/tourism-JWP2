@@ -1,6 +1,6 @@
 <template>
     <div class="card">
-        <div style="margin: 10px 20px;">
+        <div style="margin: 10px 40px;">
             <router-link :to="{name: 'eventdetail', params: {id: event.id}}">
                 <div class="frame">
                     <img v-for="image in event.event_images" :src="image.filename" alt="">

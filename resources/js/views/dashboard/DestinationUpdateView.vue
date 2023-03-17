@@ -48,7 +48,9 @@
                             <button @click="refDestinationImage.click()" type=button>
                                 Pilih Gambar Destinasi:
                             </button>
-                            <img v-for="image in form.destination_images" class="w-full h-full" :src="image.url">
+                            <div class="preview-img-box">
+                                <img v-for="image in form.destination_images" class="preview-img" :src="image.filename.includes('http')?image.filename:image.image_url">
+                            </div>
                             <input hidden ref="refDestinationImage" id="idDestinationImage" type="file" multiple
                                 @change="onFileChange">
                             <div class="error" v-if="errors.destination_images">{{ errors.destination_images[0] }}</div>
@@ -56,6 +58,7 @@
                     </div>
                     <div class="form-action row center">
                         <button class="cta" type="submit">Tambah Destinasi</button>
+                        <button class="cta" type="button" @click="deleteImages">Hapus Gambar</button>
                     </div>
                 </form>
             </div>
@@ -71,7 +74,7 @@ import dataURItoBlob from '../../functions/blob'
 
 const emit = defineEmits([ 'updated' ])
 const refDestinationImage = ref()
-const destinations = ref([])
+const destination = ref()
 const regions = ref([])
 const tags = ref([])
 const title = ref('Update Destinasi')
@@ -87,6 +90,16 @@ const form = reactive({
     destination_tags: [],
     destination_images: [],
 })
+
+const deleteImages = async () => {
+    try {
+        await api.DELETE(`api/destination/${destination.value.id}`)
+        form.destination_images = []
+        destination.value.destination_images = []
+    } catch (error) {
+        console.log('gagal hapus')
+    }
+}
 
 const createImage = (file, index) => {
     if (typeof FileReader !== 'function') {
@@ -142,20 +155,23 @@ const getFormData = () => {
     return formData
 }
 
-const open = (destination, region, tag) => {
+const open = (data, region, tag) => {
     modal.value.open()
 
-    destinations.value = destination
+    destination.value = data
     regions.value = region
     tags.value = tag
+    console.log(destination, region, tag)
 
-    form.name = destination.name
-    form.address = destination.address
-    form.description = destination.description
-    form.destination_region_id = destination.destination_region_id
-    form.location = destination.location
-    form.destination_tags = destination.destination_tags.length
-    form.destination_images = destination.destination_images.filename.length
+    form.name = destination.value.name
+    form.address = destination.value.address
+    form.description = destination.value.description
+    form.destination_region_id = destination.value.destination_region_id
+    form.location = destination.value.location
+    form.destination_tags = destination.value.destination_tags.map((destination_tag) => {
+        return destination_tag.id
+    })
+    form.destination_images = destination.value.destination_images
 }
 
 const close = () => {

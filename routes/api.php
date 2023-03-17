@@ -42,6 +42,7 @@ Route::controller(DestinationController::class)->prefix('destination')->group(fu
     Route::get('{id?}', 'show')->name('destination.show');
     Route::put('{id?}', 'update')->name('destination.update');
     Route::delete('{id?}', 'destroy')->name('destination.destroy');
+    Route::delete('{destination}/delete-images', 'deleteImages')->name('destination.delete-images');
 });
 
 Route::controller(EventController::class)->prefix('event')->group(function() {

@@ -15,13 +15,13 @@
                     </div>
                     <div class="single-animation">
                         <h5>Let's explore one of the biggest city in Indonesia with famous name called City of Heroes.</h5>
-                        <a href="#beauty-of-surabaya" class="btn btn-cta">Explore</a>
+                        <a href="#surabaya360" class="btn btn-cta">Explore</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <section id="beauty-of-surabaya" class="beauty">
+    <!-- <section id="beauty-of-surabaya" class="beauty">
         <div class="wrap">
             <div class="beauty-container">
                 <div class="beauty-description padding-right animate-left">
@@ -33,28 +33,28 @@
                 <div class="beauty-box">
                     <div class="beauty-card">
                         <div class="card-img">
-                            <!-- <img src="https://cdn0-production-images-kly.akamaized.net/hulauwuEHBRwulpomyqNYAQ-8e8=/640x853/smart/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/3000653/original/064636000_1576738759-73398065_2524026567685035_6452119119050789649_n.jpg" alt=""> -->
+
                         <div class="card-title"></div>
                         <button class="btn"></button>
                         </div>
                     </div>
                     <div class="beauty-card">
                         <div class="card-img">
-                            <!-- <img src="https://cdn0-production-images-kly.akamaized.net/hulauwuEHBRwulpomyqNYAQ-8e8=/640x853/smart/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/3000653/original/064636000_1576738759-73398065_2524026567685035_6452119119050789649_n.jpg" alt=""> -->
+
                         </div>
                         <div class="card-title"></div>
                         <button class="btn"></button>
                     </div>
                     <div class="beauty-card">
                         <div class="card-img">
-                            <!-- <img src="https://cdn0-production-images-kly.akamaized.net/hulauwuEHBRwulpomyqNYAQ-8e8=/640x853/smart/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/3000653/original/064636000_1576738759-73398065_2524026567685035_6452119119050789649_n.jpg" alt=""> -->
+
                         </div>
                         <div class="card-title"></div>
                         <button class="btn"></button>
                     </div>
                     <div class="beauty-card">
                         <div class="card-img">
-                            <!-- <img src="https://cdn0-production-images-kly.akamaized.net/hulauwuEHBRwulpomyqNYAQ-8e8=/640x853/smart/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/3000653/original/064636000_1576738759-73398065_2524026567685035_6452119119050789649_n.jpg" alt=""> -->
+
                         </div>
                         <div class="card-title"></div>
                         <button class="btn"></button>
@@ -63,7 +63,7 @@
                 <a href="#surabaya360" class="btn btn-cta">Explore</a>
             </div>
         </div>
-    </section>
+    </section> -->
     <section id="surabaya360">
         <div class="wrap">
             <div class="surabaya360-container">

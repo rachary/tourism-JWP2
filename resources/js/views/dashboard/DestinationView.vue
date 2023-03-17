@@ -43,7 +43,7 @@
                         </td>
                         <td class="width12rem">
                             <div class="imgbox">
-                                <img class="imgpreview" v-for="image in destination.destination_images"  :src="image.filename" alt="">
+                                <img class="imgpreview" v-for="image in destination.destination_images"  :src="image.filename.includes('http')?image.filename:'http://127.0.0.1:8000/storage/destination_images/'+image.filename" alt="">
                             </div>
                         </td>
                         <td class="cta mid">

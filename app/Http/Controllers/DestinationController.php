@@ -9,6 +9,7 @@ use App\Http\Resources\ApiCollection;
 use App\Models\DestinationImage;
 use App\Models\DestinationRegion;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class DestinationController extends Controller
 {
@@ -31,7 +32,7 @@ class DestinationController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(DestinationRequest $request): Destination
+    public function store(DestinationRequest $request)
     {
         $validated = $request->validated();
 
@@ -49,8 +50,12 @@ class DestinationController extends Controller
         $destination->destinationTags()->sync($validated['destination_tags']);
         
         $images = [];
+        
         foreach ($validated['destination_images'] as $image) {
             $filename = $image->hashName();
+            return response()->json([
+                "data" => $image->storeAs('public/destination_images', $filename)
+            ], 500);
             $image->storeAs('public/destination_images', $filename);
 
             $destinationImage = new DestinationImage();
@@ -123,5 +128,31 @@ class DestinationController extends Controller
         $destination->delete();
 
         return $destination;
+    }
+
+    /**
+     * Delete all image of the desination.
+     * 
+     * @param  \App\Models\Destination  $destinations
+     * @return void
+     */
+    public function deleteImages(Destination $destination)
+    {
+        $destination->load(['destinationImages']);
+
+        if ($destination->destinationImages->count() === 0) {
+            return;
+        }
+
+        $pathImages = [];
+
+        /** @var \App\Models\DestinationImage */
+        foreach($destination->destinationImages as $image) {
+            $pathImages[] = $image->imagePath() . $image->filename;
+        }
+
+        Storage::delete($pathImages);
+
+        $destination->destinationImages()->delete();
     }
 }
