@@ -37,16 +37,16 @@ const DELETE = (url, data = {}) => {
   return REQUEST({ method: 'delete', url, data })
 }
 const POSTFORMDATA = (url, data) => {
-  const formData = new FormData()
-  Object.keys(data).forEach(key => {
-    formData.append(key, data[key])
-  })
+  // const formData = new FormData()
+  // Object.keys(data).forEach(key => {
+  //   formData.append(key, data[key])
+  // })
 
   return REQUEST({
     headers: { ...config.headers, 'Content-Type': 'multipart/form-data' },
     method: 'post',
     url,
-    data: formData,
+    data: data,
   })
 }
 

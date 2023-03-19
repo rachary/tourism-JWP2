@@ -1,8 +1,14 @@
 <?php
 
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\InitController;
+use App\Http\Controllers\DestinationController;
+use App\Http\Controllers\DestinationImageController;
+use App\Http\Controllers\DestinationRegionController;
+use App\Http\Controllers\DestinationTagController;
+use App\Http\Controllers\EventController;
+use App\Http\Controllers\EventImageController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserRoleController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,28 +22,39 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+Route::get('/user/role', [UserRoleController::class, 'index'])->name('role');
+Route::get('/destination/region', [DestinationRegionController::class, 'index'])->name('region');
+Route::get('/destination/tag', [DestinationTagController::class, 'index'])->name('tag');
+Route::get('/destination/image', [DestinationImageController::class, 'index'])->name('image');
+Route::get('/event/image', [EventImageController::class, 'index'])->name('image');
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) 
-{
-    return $request->user();
-});
+Route::post('/login', [LoginController::class, 'login'])->name('login');
 
-Route::controller(AuthController::class)->group(function () {
-    Route::post('login', 'login')->name('login');
-});
-
-Route::controller(InitController::class)->prefix('init')
-->middleware('auth')
-->group(function () {
-    Route::get('dashboard', 'dashboard')->name('init.dashboard');
-});
-
-Route::controller(UserController::class)->prefix('user')
-->middleware('auth')
-->group(function() {
+Route::middleware('auth:sanctum')->controller(UserController::class)->prefix('user')->group(function() {
     Route::get('', 'index')->name('user.index');
     Route::post('', 'store')->name('user.store');
     Route::get('{id?}', 'show')->name('user.show');
     Route::put('{id?}', 'update')->name('user.update');
     Route::delete('{id?}', 'destroy')->name('user.destroy');
 });
+
+Route::controller(DestinationController::class)->prefix('destination')->group(function() {
+    Route::get('', 'index')->name('destination.index');
+    Route::post('', 'store')->name('destination.store');
+    Route::get('{id?}', 'show')->name('destination.show');
+    Route::put('{id?}', 'update')->name('destination.update');
+    Route::delete('{id?}', 'destroy')->name('destination.destroy');
+    Route::delete('{destination}/delete-images', 'deleteImages')->name('destination.delete-images');
+});
+
+Route::controller(EventController::class)->prefix('event')->group(function() {
+    Route::get('', 'index')->name('event.index');
+    Route::post('', 'store')->name('event.store');
+    Route::get('{id?}', 'show')->name('event.show');
+    Route::put('{id?}', 'update')->name('event.update');
+    Route::delete('{id?}', 'destroy')->name('event.destroy');
+    Route::delete('{event}/delete-images', 'deleteImages')->name('event.delete-images');
+});
+
+
+

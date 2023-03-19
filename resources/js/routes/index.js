@@ -16,28 +16,39 @@ const router = createRouter({
                 {
                     path: 'destination',
                     name: 'destination',
-                    component: () => import('../views/app/DestinationView.vue')
+                    component: () => import('../views/app/DestinationView.vue'),
+                },
+                {
+                    path: 'destination/:id',
+                    name: 'destinationdetail',
+                    component: () => import('../views/app/DestinationDetailView.vue'),
                 },
                 {
                     path: 'event',
                     name: 'event',
-                    component: () => import('../views/app/DestinationView.vue')
+                    component: () => import('../views/app/EventView.vue')
+                },
+                {
+                    path: 'event/:id',
+                    name: 'eventdetail',
+                    component: () => import('../views/app/EventDetailView.vue')
                 },
             ],
         },
         {
             path: '/dashboard',
             component: () => import('../layouts/dashboard/DashboardIndexLayout.vue'),
+            meta: { requiresAuth: true },
             children: [
                 {
                     path: '',
-                    name: 'dashboarduser',
-                    component: () => import('../views/dashboard/UserView.vue')
-                },
-                {
-                    path: 'destinasi',
                     name: 'dashboarddestination',
                     component: () => import('../views/dashboard/DestinationView.vue')
+                },
+                {
+                    path: 'user',
+                    name: 'dashboarduser',
+                    component: () => import('../views/dashboard/UserView.vue')
                 },
                 {
                     path: 'event',
@@ -62,6 +73,45 @@ const router = createRouter({
             component: () => import('../views/LoginView.vue')
         }
     ]
+})
+
+router.beforeEach((to, from, next) => {
+    const userrole = localStorage.getItem('userrole');
+
+    /**
+     * Route Guard for landing page and user
+     */
+    if(to.path === '/') {
+        if (userrole) {
+            next('/dashboard');
+        } else {
+            next();
+        }
+    } else if (to.path === '/dashboard/user') {
+        if (userrole == 1) {
+            next();
+        } else {
+            next('/dashboard')
+        }
+    } 
+    /**
+     * Route Guard for login
+     */
+    if (to.path === '/login') {
+        if (userrole) {
+            next('/dashboard');        
+        } else {
+            next();
+        }
+    } else if (to.matched.some(record => record.meta.requiresAuth)) {
+        if (!userrole) {
+            next('/login');
+        } else {
+            next();
+        }
+    } else {
+        next();
+    }
 })
 
 export default router;

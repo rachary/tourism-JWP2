@@ -1,9 +1,7 @@
 <template>
     <main>
-        <template v-if="user">
-            <side-layout/>
-            <router-view class="content-layout"/>    
-        </template>
+        <side-layout/>
+        <router-view class="content-layout"/>    
     </main>
 </template>
 
@@ -16,16 +14,9 @@ import { useRouter } from 'vue-router';
 const user = ref()
 const router = useRouter()
 
-api.onError.unauthorized = () => {
-    router.replace({name: 'login'})
-}
 
-const init = async () => {
-    const response = await api.GET('api/init/dashboard')
-    user.value = response.user
-}
 
-init()
+
 
 </script>
 

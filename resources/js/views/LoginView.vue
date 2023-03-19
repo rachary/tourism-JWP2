@@ -39,10 +39,22 @@ const errors = ref({})
 const submit = async () => {
     submitting.value = true
     try {
-        await api.POST('api/login', form)
-        router.replace({name: 'dashboarduser'})
+        const response = await api.POST('api/login', form)
+
+        const username = response.name
+        const userrole = response.user_role_id
+
+        localStorage.setItem('username', username)
+        localStorage.setItem('userrole', userrole)
+
+        if(userrole==1) {
+            router.replace({name: 'dashboarduser'})
+        } else {
+            router.replace({name: 'dashboarddestination'})
+        }
     } catch (error) {
         errors.value = api.formErrors(error)
+        alert('Email atau password salah')
     } finally {
         submitting.value = false
     }

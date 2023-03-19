@@ -1,15 +1,16 @@
 <template>
     <div class="wrap">
         <div class="header">
-            INI DESTINASI APP
+            DESTINASI APP
         </div>
         <div class="wrapper">
-        
+            <destination-view/>
         </div>
     </div>
 </template>
 
 <script setup>
+import DestinationView from '../app/DestinationView.vue';
 
 </script>
 

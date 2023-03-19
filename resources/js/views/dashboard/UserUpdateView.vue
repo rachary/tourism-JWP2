@@ -25,9 +25,8 @@
                     </div>
                     <div class="row">
                         <label>Pilih Role:</label>
-                        <select v-model="form.role" class="form-input">
-                            <option value="contributor">Contributor</option>
-                            <option value="administrator">Administrator</option>
+                        <select v-model="form.role"  class="form-input">
+                            <option v-for="role in roles" :value="role.name" >{{ role.name }}</option>
                         </select>
                     </div>
                     <div class="row center">
@@ -45,11 +44,10 @@ import AppModalComponent from '../../components/AppModalComponent.vue';
 import api from '../../functions/api';
 
 const emit = defineEmits([ 'updated' ])
-
 const title = ref('Update Data User')
 const modal = ref()
 const user = ref()
-
+const roles = ref()
 const submitting = ref(false)
 const errors = ref({})
 const form = reactive({
@@ -60,13 +58,15 @@ const form = reactive({
     role: '',
 })
 
-const open = (data) => {
+const open = (data, data2) => {
     modal.value.open()
+    
     user.value = data
+    roles.value = data2
     form.name = data.name
     form.email = data.email
     form.phone = data.phone
-    
+    form.role = data.user_role.name
 }
 const close = () => {
     modal.value.close()
@@ -74,9 +74,11 @@ const close = () => {
 const submit = async () => {
     submitting.value = true
     try {
-        const response = await api.PUT(`api/user/${user.value.id}`, form)
+        const response = await api.PUT(`/api/user/${user.value.id}`, form)
         emit('updated', response)
         close()
+        alert('User Updated')
+        location.reload()
     } catch (error) {
         errors.value = api.formErrors(error)
     } finally {

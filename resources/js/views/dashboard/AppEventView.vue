@@ -1,16 +1,16 @@
 <template>
     <div class="wrap">
         <div class="header">
-            INI EVENT APP
+            EVENT APP
         </div>
         <div class="wrapper">
-        
+            <event-view/>
         </div>
     </div>
 </template>
 
 <script setup>
-
+import EventView from '../app/EventView.vue';
 </script>
 
 <style scoped>

@@ -43,7 +43,7 @@ class User extends Authenticatable
     ];
 
     /**
-     * Get role of this user
+     * Relation with table UserRole
      * 
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

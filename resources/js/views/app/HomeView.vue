@@ -5,8 +5,8 @@
         </video>
         <div class="wrap">
             <div class="container">
-                <h2 class="sub-headline">You will love every corner of it</h2>
-                <h1 class="headline">Wisata Surabaya</h1>
+                <h2 class="sub-size sub-headline">You will love every corner of it</h2>
+                <h1 class="size headline">Wisata Surabaya</h1>
                 <div class="headline-description">
                     <div class="separator">
                         <div class="line line-left"></div>
@@ -23,7 +23,7 @@
     </section>
     <section id="beauty-of-surabaya" class="beauty">
         <div class="wrap">
-            <div class="beauty-info">
+            <div class="beauty-container">
                 <div class="beauty-description padding-right animate-left">
                     <div class="global-headline">
                         <h2 class="sub-headline">Beauty of</h2>
@@ -31,23 +31,114 @@
                     </div>
                 </div>
                 <div class="beauty-box">
-                    <div class="beauty-card">
-                        <div class="card-img">
-                            <img src="https://cdn0-production-images-kly.akamaized.net/hulauwuEHBRwulpomyqNYAQ-8e8=/640x853/smart/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/3000653/original/064636000_1576738759-73398065_2524026567685035_6452119119050789649_n.jpg" alt="">
+                    <div class="beauty-card" v-for="destination in randomDestinations">
+                        <div class="img-card">
+                            <img v-for="image in destination.destination_images" :src="image.filename.includes('http')?image.filename:'http://127.0.0.1:8000/storage/destination_images/'+image.filename" alt="">
                         </div>
-                        <div class="card-title"></div>
-                        <button class="btn"></button>
+                        <div class="content-card">
+                            <div class="content-title">{{ destination.name }}</div>
+                            <div class="content-description ellipsis">
+                                <p>{{ destination.description }}</p>
+                            </div>
+                        </div>
                     </div>
+                    <div class="beauty-card" v-for="event in randomEvents">
+                        <div class="img-card">
+                            <img v-for="image in event.event_images" :src="image.filename.includes('http')?image.filename:'http://127.0.0.1:8000/storage/event_images/'+image.filename" alt="">
+                        </div>
+                        <div class="content-card">
+                            <div class="content-title">{{ event.name }}</div>
+                            <div class="content-description ellipsis">
+                                <p>{{ event.description }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a href="#surabaya360" class="btn btn-cta">Explore</a>
+            </div>
+        </div>
+    </section>
+    <section id="surabaya360">
+        <div class="wrap">
+            <div class="surabaya360-container">
+                <div class="surabaya360-description">
+                    <div class="global-headline">
+                        <h2 class="sub-headline">360&deg;</h2>
+                        <h1 class="headline headline-second">Surabaya</h1>
+                    </div>
+                </div>
+                <div class="surabaya360-video">
+                    <video autoplay muted loop>
+                        <source src="https://tourism.surabaya.go.id/assets/front/videos/360.mp4">
+                    </video>
+                    <a href="https://virtualtourism.surabaya.go.id/" target="_blank" class="btn-cta btn">
+                        Tekan untuk <br> explore 360&deg;
+                    </a>
                 </div>
             </div>
         </div>
     </section>
-    <section></section>
-    <section></section>
+
 </template>
 
 <script setup>
+import { ref, computed } from 'vue';
+import api from '../../functions/api'
 
+const loading = ref(false)
+const destinations = ref([])
+const events = ref([])
+const randomDestinations = ref([])
+const randomEvents = ref([])
+
+const getDestination = async () => {
+    loading.value = true
+    try {
+        const response = await api.GET('/api/destination')
+        destinations.value = response.data
+        if (destinations.value.length >= 2) {
+            const randomIndex = []
+            while (randomIndex.length < 2) {
+                const random = Math.floor(Math.random() * destinations.value.length)
+                if (!randomIndex.includes(random)) {
+                    randomIndex.push(random)
+                }
+            }
+            randomDestinations.value = [
+                destinations.value[randomIndex[0]],
+                destinations.value[randomIndex[1]],
+            ]
+        }
+    } finally {
+        loading.value = false
+    }
+}
+const getEvent = async () => {
+    loading.value = true
+    try {
+        const response = await api.GET('/api/event')
+        events.value = response.data
+        console.log(response.data)
+        if (events.value.length >= 2) {
+            const randomIndex = []
+            while (randomIndex.length < 2) {
+                const random = Math.floor(Math.random() * events.value.length)
+                if (!randomIndex.includes(random)) {
+                    randomIndex.push(random)
+                }
+            }
+            randomEvents.value = [
+                events.value[randomIndex[0]],
+                events.value[randomIndex[1]],
+            ]
+            console.log(randomEvents.value)
+        }
+    } finally {
+        loading.value = false
+    }
+}
+getDestination()
+getEvent()
 </script>
 
 <style scoped>
@@ -73,24 +164,28 @@ section {
 
 .sub-headline {
     font-family: 'Beau Rivage', cursive;
-    font-size: 2.5rem;
+    font-size: 2rem;
     transform: translateY(20%);
     letter-spacing: .09rem;
     pointer-events: none;
 }
-
+.headline {
+    text-transform: uppercase;
+    font-size: 2rem;
+    letter-spacing: .5rem;
+    pointer-events: none;
+}
 .first-letter {
     font-family: 'Beau Rivage', cursive;
     font-size: 4rem;
 }
 
-.headline {
-    text-transform: uppercase;
-    font-size: 3rem;
-    letter-spacing: .5rem;
-    pointer-events: none;
+.sub-size {
+    font-size: 3rem
 }
-
+.size {
+    font-size: 4rem;
+}
 .separator {
     display: flex;
     align-items: center;
@@ -156,5 +251,68 @@ section {
 /* Section 2 */
 #beauty-of-surabaya {
     padding-top: 3.5rem;
+}
+.beauty-box {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    min-height: calc(100vh - 10rem);
+    justify-content: center;
+}
+.img-card {
+    min-width: 20rem;
+    min-height: 15rem;
+    width: 20rem;
+    height: 15rem;
+    overflow: hidden;
+}
+.img-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.beauty-card {
+    display: flex;
+    gap: 1rem;
+    width: fit-content;
+    max-width: 49%;
+    height: fit-content;
+}
+.content-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+.ellipsis p {
+    display: -webkit-box;
+    -webkit-line-clamp: 8;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    width:100%;
+}
+
+
+/* 360 Surabaya */
+#surabaya360 {
+    padding-top: 3.5rem;
+}
+.surabaya360-video {
+    height: calc(100vh - 10rem);
+    width: 100%;
+    position: relative;
+}
+.surabaya360-video > video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: relative;
+    z-index: -10;
+}
+.surabaya360-video > a {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-75%);
+    box-shadow: 5px 10px 5px 1px rgba(0, 0, 0, .5);
+    text-align: center;
 }
 </style>

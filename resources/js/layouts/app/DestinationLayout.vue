@@ -1,15 +1,27 @@
 <template>
     <div class="card">
         <div style="margin: 10px 20px">
-            <a style="" href="">
-                <div class="hover-zoom">
-                    <img :src="destination.imageUrl" alt="">
+            <router-link :to="{ name: 'destinationdetail', params: {id: destination.id}}">
+                <div class="frame">
+                    <div class="slider-frame">
+                        <div class="img-container" v-for="image in destination.destination_images">
+                            <img :src="image.filename.includes('http')?image.filename:'http://127.0.0.1:8000/storage/destination_images/'+image.filename" alt="">
+                        </div>
+                    </div>
                 </div>
-                <h6>{{ destination.tag }}</h6>
-                <h5>{{ destination.name }}</h5>
-                <p><span><fa-icon style="font-size:18px;margin-right:5px;" icon="fa-solid fa-location-dot" /></span> {{
-                    destination.address }}</p>
-            </a>
+                <div class="tagbox">
+                    <div class="tag" v-for="tag in destination.destination_tags">
+                        <h6>{{ tag.name }}</h6>
+                    </div>
+                </div>
+                <div class="name">
+                    {{ destination.name }}
+                </div>
+                <div class="address">
+                    <fa-icon class="icon" icon="fa-solid fa-location-dot"/>
+                    {{ destination.address }}
+                </div>
+            </router-link>
         </div>
     </div>
 </template>
@@ -38,23 +50,19 @@ a {
     width: min-content;
 }
 
-a .hover-zoom {
-    height: 100%;
+a .frame {
     overflow: hidden;
-    border-radius: 16px;
-}
-a .hover-zoom {
-    border-radius: 4px;
-    width: 250px;
+    border-radius: 1rem;
+    width: 15rem;
     height: 100%;
-    max-height: 150px;
+    max-height: 8.4rem;
 }
 
-a .hover-zoom img {
+a .frame img {
     height: 100%;
     width: 100%;
     object-fit: cover;
-    border-radius: 16px;
+    border-radius: 1rem;
     transform-origin: 50% 65%;
     transition: transform 5s, filter 3s ease-in;
     z-index: -1;
@@ -62,28 +70,62 @@ a .hover-zoom img {
 }
 
 
-a .hover-zoom img:hover {
+a .frame img:hover {
     transform: scale(1.5);
 }
+.tagbox {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: .1rem;
+    width: 100%;
+}
+.tag {
 
+}
 a h6 {
-    margin: 5px 0;
-    padding: 5px 7px;
+    padding: .3125rem .4375rem;
     background: #6868AC;
     width: fit-content;
     color: white;
-    letter-spacing: .5px;
+    letter-spacing: .050rem;
     font-weight: 500;
-    border-radius: 5px;
+    border-radius: .3125rem;
+    font-size: .7rem;
 }
 
 a h5 {
-    font-size: 16px;
+    font-size: 1rem;
     letter-spacing: -1px;
     font-weight: 600;
     text-align: center;
 }
 
 a p {
-    font-size: 14px;
-}</style>
+    font-size: 1rem;
+}
+.name {
+    width: 90%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: inline-block;
+    text-align: center;
+    font-size: 1rem;
+    letter-spacing: -1px;
+    font-weight: 600;
+    text-align: center;
+}
+.address {
+    max-width: 15rem;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: inline-block;
+    text-align: center;
+}
+.icon {
+    font-size:18px;
+    margin-right:5px;
+}
+</style>

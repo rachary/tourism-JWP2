@@ -26,8 +26,7 @@
                 <div class="row">
                     <label>Pilih Role:</label>
                     <select v-model="form.role" class="form-input">
-                        <option value="contributor">Contributor</option>
-                        <option value="administrator">Administrator</option>
+                        <option v-for="role in roles" :value="role.name">{{ role.name }}</option>
                     </select>
                 </div>
                 <div class="row center">
@@ -56,28 +55,32 @@ const form = reactive({
     phone: '',
     role: 'contributor',
 })
+const roles = ref([])
 
-const open = () => {
+const open = (data) => {
     modal.value.open()
+    roles.value = data
 }
 const close = () => {
     modal.value.close()
+    form.name = ''
+    form.email = ''
+    form.password = ''
+    form.phone = ''
+    form.role = 'contributor'
 }
+
 const submit = async () => {
     submitting.value = true
     try {
-        const response = await api.POST('api/user', form)
+        const response = await api.POST('/api/user', form)
         emit('created', response)
         close()
     } catch (error) {
-        errors.value = api.formErrors(error)     
+        errors.value = api.formErrors(error)
     } finally {
         submitting.value = false
-        form.value.name = ''
-        form.value.email = ''
-        form.value.password = ''
-        form.value.phone = ''
-        form.value.role = 'contributor'
+        
     }
 }
 
