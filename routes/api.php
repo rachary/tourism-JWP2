@@ -5,6 +5,7 @@ use App\Http\Controllers\DestinationImageController;
 use App\Http\Controllers\DestinationRegionController;
 use App\Http\Controllers\DestinationTagController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\EventImageController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserRoleController;
@@ -25,6 +26,7 @@ Route::get('/user/role', [UserRoleController::class, 'index'])->name('role');
 Route::get('/destination/region', [DestinationRegionController::class, 'index'])->name('region');
 Route::get('/destination/tag', [DestinationTagController::class, 'index'])->name('tag');
 Route::get('/destination/image', [DestinationImageController::class, 'index'])->name('image');
+Route::get('/event/image', [EventImageController::class, 'index'])->name('image');
 
 Route::post('/login', [LoginController::class, 'login'])->name('login');
 
@@ -51,6 +53,7 @@ Route::controller(EventController::class)->prefix('event')->group(function() {
     Route::get('{id?}', 'show')->name('event.show');
     Route::put('{id?}', 'update')->name('event.update');
     Route::delete('{id?}', 'destroy')->name('event.destroy');
+    Route::delete('{event}/delete-images', 'deleteImages')->name('event.delete-images');
 });
 
 

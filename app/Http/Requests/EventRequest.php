@@ -30,8 +30,7 @@ class EventRequest extends FormRequest
             'date_start'=>'required|date',
             'date_end'=>'required|date',
             'location'=>'required|string',
-            'event_images'=>'required|array',
-            'event_images.*'=>'image|mimes:jpeg,png,jpg|max:2048',
+            'event_images'=>[$this->isMethod('POST') ? 'required' : 'nullable', 'array'],
         ];
     }
 
@@ -52,7 +51,6 @@ class EventRequest extends FormRequest
             'date_end.required'=>'Tanggal Event tidak boleh kosong',
             'location.required'=>'Lokasi Event tidak boleh kosong',
             'event_images.required'=>'Gambar tidak boleh kosong',
-            'event_images.max'=>'Ukuran Gambar maksimal 2MB',
 
         ];
     }

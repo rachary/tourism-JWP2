@@ -51,16 +51,19 @@
                             <button class="preview-button" @click="refEventImage.click()" type=button>
                                 Pilih Gambar Event:
                             </button>
-                            <div class="preview-img-box">
-                                <img class="preview-img" @click="removeImg" v-for="image in form.event_images" :src="image.url">
+                            <div class="img-box">
+                                <div class="preview-img-box">
+                                <img class="preview-img" v-for="image in form.event_images" :src="image.image_url">
+                                </div>
+                                <input 
+                                hidden 
+                                ref="refEventImage"
+                                id="idEventImage" 
+                                type="file"
+                                multiple 
+                                @change="onFileChange">
+                                <button class="cta btn-remove" type="button" @click="deleteImages">Hapus Gambar</button>
                             </div>
-                            <input 
-                            hidden 
-                            ref="refEventImage"
-                            id="idEventImage" 
-                            type="file"
-                            multiple 
-                            @change="onFileChange">
                             <div class="error" v-if="errors.event_images">{{ errors.event_images[0] }}</div>
                         </div>
                     </div>
@@ -97,6 +100,10 @@ const form = reactive({
     event_images: [],
 })
 
+const deleteImages = () => {
+    form.destination_images = []
+}
+
 const createImage = (file, index) => {
     if (typeof FileReader !== 'function') {
       alert('Sorry, FileReader API not supported')
@@ -108,7 +115,7 @@ const createImage = (file, index) => {
       reader.readAsDataURL(file)
       reader.onload = e => {
         const image = {
-          url: e.target?.result,
+          image_url: e.target?.result,
           original: e.target?.result,
         }
         form.event_images[index] = { ...image, file }
@@ -123,7 +130,7 @@ const createImage = (file, index) => {
     }
 
     const files = event.target.files
-    let countImages = form.event_images.filter(image => image.url).length
+    let countImages = form.event_images.filter(image => image.image_url).length
     for (let i = 0; i < files.length; i++) {
       if (countImages >= 5) break
       await createImage(files[i], countImages)
@@ -145,7 +152,7 @@ const getFormData = () => {
     formData.append('time', form.time)
     formData.append('organizer', form.organizer)
     form.event_images.forEach((image, index) => {
-        formData.append(`event_images[${index}]`, dataURItoBlob(image.url))
+        formData.append(`event_images[${index}]`, dataURItoBlob(image.image_url))
     })
 
     return formData
@@ -315,6 +322,9 @@ button {
 .tag label, .tag label:before {
     transition: 0.25s all ease;
 }
+.img-box {
+    margin-top: .5rem;
+}
 .preview-img-box {
     display: flex;
     flex-wrap: wrap;
@@ -326,5 +336,10 @@ button {
 .preview-img {
     width: 5rem;
     height: 5rem;
+}
+
+.btn-remove {
+    margin-top: .5rem;
+    width: 100%;
 }
 </style>

@@ -5,7 +5,7 @@
                 <div class="frame">
                     <div class="slider-frame">
                         <div class="img-container" v-for="image in destination.destination_images">
-                            <img :src="image.filename" alt="">
+                            <img :src="image.filename.includes('http')?image.filename:'http://127.0.0.1:8000/storage/destination_images/'+image.filename" alt="">
                         </div>
                     </div>
                 </div>

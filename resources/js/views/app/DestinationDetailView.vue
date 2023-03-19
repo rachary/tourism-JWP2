@@ -6,29 +6,8 @@
                     {{ destinations.name }}
                 </div>
                 <div class="container-img">
-                    <div class="slides">
-                        <input class="radio" type="radio" name="radio-btn" id="radio1">
-                        <input class="radio" type="radio" name="radio-btn" id="radio2">
-                        <input class="radio" type="radio" name="radio-btn" id="radio3">
-                        <input class="radio" type="radio" name="radio-btn" id="radio4">
-                        <div class="slide first">
-                            <img src="https://tourism.surabaya.go.id/storage/tour/1648710891_1.jpg" alt="">
-                        </div>
-                        <div class="slide">
-                            <img src="https://tourism.surabaya.go.id/storage/tour/1654138693_1.jpg" alt="">
-                        </div>
-                        <div class="slide">
-                            <img src="https://tourism.surabaya.go.id/storage/tour/1648713405_1.jpg" alt="">
-                        </div>
-                        <div class="slide">
-                            <img src="https://tourism.surabaya.go.id/storage/tour/1648713708_1.jpg" alt="">
-                        </div>
-                        <div class="navigation-manual">
-                            <label for="radio1" class="manual-btn"></label>
-                            <label for="radio2" class="manual-btn"></label>
-                            <label for="radio3" class="manual-btn"></label>
-                            <label for="radio4" class="manual-btn"></label>
-                        </div>
+                    <div class="img-preview">
+                        <img v-for="image in images" :src="image.filename.includes('http')?image.filename:'http://127.0.0.1:8000/storage/destination_images/'+image.filename" alt="">
                     </div>
                 </div>
                 <div class="container-content">
@@ -78,7 +57,7 @@ const getDestination = async () => {
         loading.value = false
     }
 }
-const getDestinationtag = async () => {
+const getDestinationTag = async () => {
     loading.value = true
     try {
         const response = await api.GET(`/api/destination/tag`)
@@ -90,26 +69,17 @@ const getDestinationtag = async () => {
 const getDestinationImage = async () => {
     loading.value = true
     try {
-        const response = await api.GET(`/api/destination/image`)
-        images.value = response.data
+        const response = await api.GET(`/api/destination/image/`)
+        images.value = response.data.filter(img => img.destination_id == route.params.id)
+
     } finally {
         loading.value = false
     }
 }
 
-
-setInterval(function () {
-    let counter = 1;
-    document.getElementById('radio' + counter).checked = true;
-    counter++;
-    if (counter > 4) {
-        counter = 1
-    }
-}, 5000)
-
 getDestination()
 getDestinationImage()
-getDestinationtag()
+getDestinationTag()
 </script>
 
 <style scoped>
@@ -134,66 +104,11 @@ section {
     margin: 1rem auto;
     border-radius: .5rem;
 }
-
-.slides {
-    display: flex;
-    width: 500%;
-    height: 100%;
-}
-
-.slide {
-    width: 20%;
-    transition: 2s;
-}
-
-.radio {
-    display: none;
-
-}
-
-.slide img {
+.container-img > img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
-
-.navigation-manual {
-    position: absolute;
-    width: 90%;
-    bottom: 3rem;
-    text-align: center;
-    z-index: 1;
-}
-
-.navigation-manual .manual-btn {
-    padding: .5rem;
-    border-radius: 2rem;
-    cursor: pointer;
-    transition: 1s;
-    background: #8AAAE4;
-    box-shadow: 5px 5px 5px 0 rgba(0, 0, 0, .5);
-}
-
-.manual-btn:not(:last-child) {
-    margin-right: 40px;
-}
-
-#radio1:checked ~ .first {
-    margin-left: 0;
-}
-
-#radio2:checked ~ .first {
-    margin-left: -20%;
-}
-
-#radio3:checked ~ .first {
-    margin-left: -40%;
-}
-
-#radio4:checked ~ .first {
-    margin-left: -60%;
-}
-
 .content-head {
     font-size: 1.5rem;
 }

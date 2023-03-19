@@ -32,7 +32,7 @@ class DestinationController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(DestinationRequest $request)
+    public function store(DestinationRequest $request): Destination
     {
         $validated = $request->validated();
 
@@ -53,9 +53,6 @@ class DestinationController extends Controller
         
         foreach ($validated['destination_images'] as $image) {
             $filename = $image->hashName();
-            return response()->json([
-                "data" => $image->storeAs('public/destination_images', $filename)
-            ], 500);
             $image->storeAs('public/destination_images', $filename);
 
             $destinationImage = new DestinationImage();
@@ -88,7 +85,7 @@ class DestinationController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Destination $destination, $id)
+    public function update(DestinationRequest $request, Destination $destination, $id)
     {
         $validated = $request->validated();
 
@@ -103,11 +100,12 @@ class DestinationController extends Controller
         
         $destination->save();
 
-        $destination->destinationTags()->associate($validated['destination_tags']);
+        $destination->destinationTags()->sync($validated['destination_tags']);
         
-        $images = [];
+        if ($request->has('destination_images')) {
+            $images = []; 
         foreach ($validated['destination_images'] as $image) {
-            $filename = time() . '-' . $image->getClientOriginalName();
+            $filename = $image->hashName();
             $image->storeAs('public/destination_images', $filename);
 
             $destinationImage = new DestinationImage();
@@ -115,6 +113,7 @@ class DestinationController extends Controller
             $images[] = $destinationImage;
         }
         $destination->destinationImages()->saveMany($images);
+        }
 
         return $destination;
     }

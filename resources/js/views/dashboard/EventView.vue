@@ -40,15 +40,15 @@
                         <td class="width8rem">{{ event.date_start }}</td>
                         <td class="width8rem">{{ event.date_end }}</td>
                         <td class="width8rem">{{ event.time }}</td>
-                        <td class="width8rem">{{ event.organizer }}</td>
+                        <td class="ellipsis width8rem">{{ event.organizer }}</td>
                         <td class="width12rem">
                             <div class="imgbox">
                                 <img class="imgpreview" v-for="image in event.event_images"
-                                    :src="image.filename" alt="">
+                                    :src="image.filename.includes('http')?image.filename:'http://127.0.0.1:8000/storage/event_images/'+image.filename" alt="">
                             </div>
                         </td>
                         <td class="cta mid">
-                            <button @click="refEventUpdate.open(event, regions, tags)
+                            <button @click="refEventUpdate.open(event)
                             ">
                                 <fa-icon class="icon" icon="fa-solid fa-pen-to-square"></fa-icon>
                             </button>
@@ -71,7 +71,7 @@
 import { ref } from 'vue';
 import AppTableComponent from '../../components/AppTableComponent.vue';
 import EventAddView from './EventAddView.vue';
-import EventUpdateView from './DestinationUpdateView.vue';
+import EventUpdateView from './EventUpdateView.vue';
 import api from '../../functions/api'
 
 const refEventUpdate = ref()

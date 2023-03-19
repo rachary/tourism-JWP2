@@ -29,7 +29,7 @@ class DestinationRequest extends FormRequest
             'destination_region_id'=>'required|exists:destination_regions,id',
             'destination_tags'=>'required|array|min:1',
             'destination_tags.*'=>'exists:destination_tags,id',
-            'destination_images'=>'required|array',
+            'destination_images'=> [$this->isMethod('POST') ? 'required' : 'nullable',  'array'],
             
         ];
     }

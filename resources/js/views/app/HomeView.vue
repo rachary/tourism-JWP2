@@ -15,13 +15,13 @@
                     </div>
                     <div class="single-animation">
                         <h5>Let's explore one of the biggest city in Indonesia with famous name called City of Heroes.</h5>
-                        <a href="#surabaya360" class="btn btn-cta">Explore</a>
+                        <a href="#beauty-of-surabaya" class="btn btn-cta">Explore</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <!-- <section id="beauty-of-surabaya" class="beauty">
+    <section id="beauty-of-surabaya" class="beauty">
         <div class="wrap">
             <div class="beauty-container">
                 <div class="beauty-description padding-right animate-left">
@@ -31,39 +31,33 @@
                     </div>
                 </div>
                 <div class="beauty-box">
-                    <div class="beauty-card">
-                        <div class="card-img">
-
-                        <div class="card-title"></div>
-                        <button class="btn"></button>
+                    <div class="beauty-card" v-for="destination in randomDestinations">
+                        <div class="img-card">
+                            <img v-for="image in destination.destination_images" :src="image.filename.includes('http')?image.filename:'http://127.0.0.1:8000/storage/destination_images/'+image.filename" alt="">
+                        </div>
+                        <div class="content-card">
+                            <div class="content-title">{{ destination.name }}</div>
+                            <div class="content-description ellipsis">
+                                <p>{{ destination.description }}</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="beauty-card">
-                        <div class="card-img">
-
+                    <div class="beauty-card" v-for="event in randomEvents">
+                        <div class="img-card">
+                            <img v-for="image in event.event_images" :src="image.filename.includes('http')?image.filename:'http://127.0.0.1:8000/storage/event_images/'+image.filename" alt="">
                         </div>
-                        <div class="card-title"></div>
-                        <button class="btn"></button>
-                    </div>
-                    <div class="beauty-card">
-                        <div class="card-img">
-
+                        <div class="content-card">
+                            <div class="content-title">{{ event.name }}</div>
+                            <div class="content-description ellipsis">
+                                <p>{{ event.description }}</p>
+                            </div>
                         </div>
-                        <div class="card-title"></div>
-                        <button class="btn"></button>
-                    </div>
-                    <div class="beauty-card">
-                        <div class="card-img">
-
-                        </div>
-                        <div class="card-title"></div>
-                        <button class="btn"></button>
                     </div>
                 </div>
                 <a href="#surabaya360" class="btn btn-cta">Explore</a>
             </div>
         </div>
-    </section> -->
+    </section>
     <section id="surabaya360">
         <div class="wrap">
             <div class="surabaya360-container">
@@ -88,7 +82,63 @@
 </template>
 
 <script setup>
+import { ref, computed } from 'vue';
+import api from '../../functions/api'
 
+const loading = ref(false)
+const destinations = ref([])
+const events = ref([])
+const randomDestinations = ref([])
+const randomEvents = ref([])
+
+const getDestination = async () => {
+    loading.value = true
+    try {
+        const response = await api.GET('/api/destination')
+        destinations.value = response.data
+        if (destinations.value.length >= 2) {
+            const randomIndex = []
+            while (randomIndex.length < 2) {
+                const random = Math.floor(Math.random() * destinations.value.length)
+                if (!randomIndex.includes(random)) {
+                    randomIndex.push(random)
+                }
+            }
+            randomDestinations.value = [
+                destinations.value[randomIndex[0]],
+                destinations.value[randomIndex[1]],
+            ]
+        }
+    } finally {
+        loading.value = false
+    }
+}
+const getEvent = async () => {
+    loading.value = true
+    try {
+        const response = await api.GET('/api/event')
+        events.value = response.data
+        console.log(response.data)
+        if (events.value.length >= 2) {
+            const randomIndex = []
+            while (randomIndex.length < 2) {
+                const random = Math.floor(Math.random() * events.value.length)
+                if (!randomIndex.includes(random)) {
+                    randomIndex.push(random)
+                }
+            }
+            randomEvents.value = [
+                events.value[randomIndex[0]],
+                events.value[randomIndex[1]],
+            ]
+            console.log(randomEvents.value)
+        }
+    } finally {
+        loading.value = false
+    }
+}
+getDestination()
+getEvent()
 </script>
 
 <style scoped>
@@ -203,56 +253,43 @@ section {
     padding-top: 3.5rem;
 }
 .beauty-box {
-    display: grid;
-    height: calc(100vh - 10rem);
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
-    grid-template-areas: 
-        'card__1 kosong card__3 kosong',
-        'card__1 card__2 card__3 card__4',
-        'kosong card__2 kosong card__4',
-    ;
-}
-.beauty-card {
-    
-}
-.beauty-card:nth-child(1) {
-    background: red;
-}
-.beauty-card:nth-child(2) {
-    background: blue;
-
-}
-.beauty-card:nth-child(3) {
-    background: green;
-
-}
-.beauty-card:nth-child(4) {
-    background: yellow;
-
-}
-.card-fill {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 1rem;
+    min-height: calc(100vh - 10rem);
+    justify-content: center;
 }
-
-.card-img:nth-child(1) {
-
+.img-card {
+    min-width: 20rem;
+    min-height: 15rem;
+    width: 20rem;
+    height: 15rem;
+    overflow: hidden;
 }
-.card-img:nth-child(2) {
-
-}
-.card-img:nth-child(3) {
- 
-}
-.card-img:nth-child(4) {
-
-}
-.card-img img {
-    background-size: cover;
+.img-card img {
     width: 100%;
     height: 100%;
+    object-fit: cover;
 }
+.beauty-card {
+    display: flex;
+    gap: 1rem;
+    width: fit-content;
+    max-width: 49%;
+    height: fit-content;
+}
+.content-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+.ellipsis p {
+    display: -webkit-box;
+    -webkit-line-clamp: 8;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    width:100%;
+}
+
 
 /* 360 Surabaya */
 #surabaya360 {

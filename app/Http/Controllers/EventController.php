@@ -8,6 +8,7 @@ use App\Http\Requests\EventRequest;
 use App\Http\Resources\ApiCollection;
 use App\Models\EventImage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class EventController extends Controller
 {
@@ -27,7 +28,7 @@ class EventController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(EventRequest $request)
+    public function store(EventRequest $request): Event
     {
         $validated = $request->validated();
 
@@ -77,11 +78,11 @@ class EventController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Event $event)
+    public function update(EventRequest $request, Event $event, $id)
     {
         $validated = $request->validated();
 
-        $event = new Event();
+        $event = Event::find($id);
         $event->name = $validated['name'];
         $event->address = $validated['address'];
         $event->description = $validated['description'];
@@ -92,7 +93,8 @@ class EventController extends Controller
         $event->location = $validated['location'];
         $event->save();
 
-        $images = [];
+        if ($request->has('event_images')) {
+            $images = [];
         foreach($validated['event_images'] as $image) {
             $filename = $image->hashName();
             $image->storeAs('public/event_images', $filename);
@@ -102,6 +104,7 @@ class EventController extends Controller
             $images[] = $eventImage;
         }
         $event->eventImages()->saveMany($images);
+        }
 
         return $event;
     }
@@ -115,5 +118,31 @@ class EventController extends Controller
         $event->delete();
 
         return $event;
+    }
+
+    /**
+     * Delete all image of the event
+     * 
+     * @param \App\Models\Event $event
+     * @return void
+     */
+    public function deleteImages(Event $event)
+    {
+        $event->load(['eventImages']);
+
+        if ($event->eventImages->count() === 0) {
+            return;
+        }
+
+        $pathImages = [];
+
+        /** @var \App\Models\EventImage */
+        foreach($event->eventImages as $image) {
+            $pathImages[] = $image->imagePath() . $image->filename;
+        }
+
+        Storage::delete($pathImages);
+
+        $event->eventImages()->delete();
     }
 }

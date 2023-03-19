@@ -5,66 +5,70 @@
                 <form @submit.prevent="submit">
                     <div class="form-left">
                         <div class="row">
-                            <label>Masukkan Nama Destinasi:</label>
+                            <label>Masukkan Nama Event:</label>
                             <input v-model="form.name" type="text">
                             <div class="error" v-if="errors.name">{{ errors.name[0] }}</div>
                         </div>
                         <div class="row">
-                            <label>Masukkan Alamat Destinasi:</label>
+                            <label>Masukkan Alamat Event:</label>
                             <textarea v-model="form.address"></textarea>
                             <div class="error" v-if="errors.address">{{ errors.address[0] }}</div>
                         </div>
                         <div class="row">
-                            <label>Masukkan Deskripsi Destinasi:</label>
+                            <label>Masukkan Deskripsi Event:</label>
                             <textarea v-model="form.description"></textarea>
                             <div class="error" v-if="errors.description">{{ errors.description[0] }}</div>
                         </div>
                         <div class="row">
-                            <label>Pilih Region Destinasi:</label>
-                            <select v-model="form.destination_region_id" class="form-input">
-                                <option v-for="region in regions" :value="region.id">{{ region.name }}</option>
-                            </select>
-                        </div>
-                        <div class="row">
-                            <label>Masukkan URL Embed Map Destinasi:</label>
+                            <label>Masukkan URL Embed Map Event:</label>
                             <textarea v-model="form.location"></textarea>
                             <div class="error" v-if="errors.location">{{ errors.location[0] }}</div>
+                        </div>
+                        <div class="row">
+                            <label>Tanggal Event Dimulai:</label>
+                            <input type="date" v-model="form.date_start">
+                            <div class="error" v-if="errors.date_start">{{ errors.date_start[0] }}</div>
                         </div>
                     </div>
                     <div class="form-divider"></div>
                     <div class="form-right">
                         <div class="row">
-                            <label>Pilih Kategori Destinasi:</label>
-                            <ul class="tag-box">
-                                <li class="tag"  v-for="tag in tags" :key="tag.id">
-                                    <input v-model="form.destination_tags" type="checkbox" :id="tag.id" :value="tag.id" multiple>
-                                    <label :for="tag.id">{{ tag.name }}</label>
-                                </li>
-                            </ul>
-                            <div class="error" v-if="errors.destination_tags">{{ errors.destination_tags[0] }}</div>
+                            <label>Tanggal Event Dimulai:</label>
+                            <input type="date" v-model="form.date_end">
+                            <div class="error" v-if="errors.date_end">{{ errors.date_end[0] }}</div>
                         </div>
                         <div class="row">
-                            <button class="preview-button" @click="refDestinationImage.click()" type=button>
-                                Pilih Gambar Destinasi:
+                            <label>Waktu Event:</label>
+                            <input type="text" v-model="form.time">
+                            <div class="error" v-if="errors.time">{{ errors.time[0] }}</div>
+                        </div>
+                        <div class="row">
+                            <label>Penyelenggara Event:</label>
+                            <input type="text" v-model="form.organizer">
+                            <div class="error" v-if="errors.organizer">{{ errors.organizer[0] }}</div>
+                        </div>
+                        <div class="row">
+                            <button class="preview-button" @click="refEventImage.click()" type=button>
+                                Pilih Gambar Event:
                             </button>
                             <div class="img-box">
                                 <div class="preview-img-box">
-                                <img class="preview-img" v-for="image in form.destination_images" :src="image.image_url">
+                                <img class="preview-img" v-for="image in form.event_images" :src="image.image_url">
                                 </div>
                                 <input 
                                 hidden 
-                                ref="refDestinationImage"
-                                id="idDestinationImage" 
+                                ref="refEventImage"
+                                id="idEventImage" 
                                 type="file"
                                 multiple 
                                 @change="onFileChange">
                                 <button class="cta btn-remove" type="button" @click="deleteImages">Hapus Gambar</button>
                             </div>
-                            <div class="error" v-if="errors.destination_images">{{ errors.destination_images[0] }}</div>
+                            <div class="error" v-if="errors.event_images">{{ errors.event_images[0] }}</div>
                         </div>
                     </div>
                     <div class="form-action row center">
-                        <button class="cta" type="submit">Tambah Destinasi</button>
+                        <button class="cta" type="submit">Update Event</button>
                     </div>
                 </form>
             </div>
@@ -78,11 +82,10 @@ import AppModalComponent from '../../components/AppModalComponent.vue';
 import api from '../../functions/api';
 import dataURItoBlob from '../../functions/blob'
 
-const refDestinationImage = ref()
-const regions = ref([])
-const tags = ref([])
-const emit = defineEmits([ 'created' ])
-const title = ref('Tambah Destinasi Baru')
+const emit = defineEmits([ 'updated' ])
+const refEventImage = ref()
+const event = ref()
+const title = ref('Update Event')
 const modal = ref()
 const submitting = ref(false)
 const errors = ref({})
@@ -90,91 +93,107 @@ const form = reactive({
     name: '',
     address: '',
     description: '',
-    destination_region_id: '',
     location: '',
-    destination_tags: [],
-    destination_images: [],
+    date_start: '',
+    date_end: '',
+    time: '',
+    organizer: '',
+    event_images: [],
 })
 
-const deleteImages = () => {
-    form.destination_images = []
+const deleteImages = async () => {
+    try {
+        await api.DELETE(`api/event/${event.value.id}/delete-images`)
+        form.event_images = []
+        event.value.event_images = []
+    } catch (error) {
+        console.log('gagal hapus')
+    }
 }
 
 const createImage = (file, index) => {
     if (typeof FileReader !== 'function') {
-      alert('Sorry, FileReader API not supported')
-      return
+        alert('Sorry, FileReader API not supported')
+        return
     }
 
     return new Promise((resolve) => {
-      const reader = new FileReader()
-      reader.readAsDataURL(file)
-      reader.onload = e => {
-        const image = {
-          image_url: e.target?.result,
-          original: e.target?.result,
+        const reader = new FileReader()
+        reader.readAsDataURL(file)
+        reader.onload = e => {
+            const image = {
+                image_url: e.target?.result,
+                original: e.target?.result,
+            }
+            form.event_images[ index ] = { ...image, file }
+            setTimeout(resolve, 250)
         }
-        form.destination_images[index] = { ...image, file }
-        setTimeout(resolve, 250)
-      }
     })
-  }
+}
 
-  const onFileChange = async (event) => {
+const onFileChange = async (event) => {
     if (!(event.target.files?.length)) {
-      return
+        return
     }
 
     const files = event.target.files
-    let countImages = form.destination_images.filter(image => image.image_url).length
+    let countImages = form.event_images.filter(image => image.image_url).length
     for (let i = 0; i < files.length; i++) {
-      if (countImages >= 5) break
-      await createImage(files[i], countImages)
-      countImages++
+        if (countImages >= 5) break
+        await createImage(files[ i ], countImages)
+        countImages++
     }
 
-    const ctx = document.getElementById('idDestinationImage')
+    const ctx = document.getElementById('idEventImage')
     ctx.value = ''
-  }
+}
 
 const getFormData = () => {
     const formData = new FormData()
     formData.append('name', form.name)
     formData.append('address', form.address)
     formData.append('description', form.description)
-    formData.append('destination_region_id', form.destination_region_id)
     formData.append('location', form.location)
-    form.destination_tags.forEach((tag, index) => {
-        formData.append(`destination_tags[${index}]`, tag)
-    })
-    form.destination_images.forEach((image, index) => {
-        formData.append(`destination_images[${index}]`, dataURItoBlob(image.image_url))
+    formData.append('date_start', form.date_start)
+    formData.append('date_end', form.date_end)
+    formData.append('time', form.time)
+    formData.append('organizer', form.organizer)
+    form.event_images.forEach((image, index) => {
+        formData.append(`event_images[${index}]`, dataURItoBlob(image.image_url))
     })
 
     return formData
 }
 
-const open = (data, data2) => {
+const open = (data) => {
     modal.value.open()
 
-    regions.value = data
-    tags.value = data2
+    event.value = data
+
+    form.name = event.value.name
+    form.address = event.value.address
+    form.description = event.value.description
+    form.location = event.value.location
+    form.date_start = event.value.date_start
+    form.date_end = event.value.date_end
+    form.time = event.value.time
+    form.organizer = event.value.organizer
+    form.event_images = event.value.event_images
 }
+
 const close = () => {
     modal.value.close()
 }
 
-
 const submit = async () => {
     submitting.value = true
     try {
-        const response = await api.POSTFORMDATA('/api/destination', getFormData())
-        emit('created', response)
+        const response = await api.POSTFORMDATA('/api/event?_method=PUT', getFormData())
+        emit('updated', response)
         close()
-        location.reload()
+        alert('Event Updated')
     } catch (error) {
         errors.value = api.formErrors(error)
-        console.log(error)
     } finally {
         submitting.value = false
     }
@@ -184,8 +203,6 @@ defineExpose({ open, close })
 </script>
     
 <style scoped>
-.form-container {
-}
 form {
     width: 60vw;
     display: flex;
@@ -195,21 +212,27 @@ form {
     text-align: left;
     justify-content: center;
 }
-.form-left, .form-right {
+
+.form-left,
+.form-right {
     width: calc(30vw - 3rem);
     border-bottom: .15rem solid #FD8A8A;
 }
+
 .form-divider {
     width: .1rem;
     background: #FD8A8A;
     margin: 0 1rem;
 }
+
 .form-action {
     margin-top: 1rem;
 }
+
 ::placeholder {
-  color: white;
+    color: white;
 }
+
 .row {
     margin-bottom: 1.2rem;
 }
@@ -231,9 +254,11 @@ button {
     color: white;
     letter-spacing: .0625rem;
 }
+
 input {
     font-size: .8rem;
 }
+
 select,
 option {
     padding: .375rem;
@@ -257,6 +282,7 @@ button {
     display: flex;
     flex-wrap: wrap;
 }
+
 .tag {
     width: 45%;
     display: flex;
@@ -272,6 +298,7 @@ button {
     display: none;
     z-index: -1;
 }
+
 .tag label {
     /* padding: .3rem;
     display: inline-block;
@@ -283,6 +310,7 @@ button {
     z-index: 1;
     margin-left: 1rem;
 }
+
 .tag label:before {
     content: "";
     position: absolute;
@@ -293,6 +321,7 @@ button {
     height: 30%;
     border: 2px solid #FD8A8A;
 }
+
 .tag label:after {
     content: "";
     position: absolute;
@@ -303,10 +332,12 @@ button {
     display: block;
     border: 1px solid #FD8A8A;
 }
+
 .tag input[type="checkbox"]:checked + label {
     color: white;
     padding: 0 .5rem;
 }
+
 .tag input[type="checkbox"]:checked + label:before {
     width: 9rem;
     top: 0;
@@ -317,14 +348,15 @@ button {
     border-radius: none;
 }
 
-
-.tag label, .tag label:before {
+.tag label,
+.tag label:before {
     transition: 0.25s all ease;
 }
 
 .img-box {
     margin-top: .5rem;
 }
+
 .preview-img-box {
     display: flex;
     flex-wrap: wrap;
@@ -337,7 +369,6 @@ button {
     width: 5rem;
     height: 5rem;
 }
-
 .btn-remove {
     margin-top: .5rem;
     width: 100%;

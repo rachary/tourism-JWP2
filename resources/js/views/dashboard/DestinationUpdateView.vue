@@ -48,17 +48,20 @@
                             <button @click="refDestinationImage.click()" type=button>
                                 Pilih Gambar Destinasi:
                             </button>
-                            <div class="preview-img-box">
-                                <img v-for="image in form.destination_images" class="preview-img" :src="image.filename.includes('http')?image.filename:image.image_url">
+                            <div class="img-box">
+                                <div class="preview-img-box">
+                                <img v-for="image in form.destination_images" class="preview-img" :src="image.image_url">
+                                <!-- image.filename.includes('http')?image.filename:image.image_url -->
+                                </div>
+                                <input hidden ref="refDestinationImage" id="idDestinationImage" type="file" multiple
+                                    @change="onFileChange">
+                                <button class="cta btn-remove" type="button" @click="deleteImages">Hapus Gambar</button>
                             </div>
-                            <input hidden ref="refDestinationImage" id="idDestinationImage" type="file" multiple
-                                @change="onFileChange">
                             <div class="error" v-if="errors.destination_images">{{ errors.destination_images[0] }}</div>
                         </div>
                     </div>
                     <div class="form-action row center">
-                        <button class="cta" type="submit">Tambah Destinasi</button>
-                        <button class="cta" type="button" @click="deleteImages">Hapus Gambar</button>
+                        <button class="cta" type="submit">Update Destinasi</button>
                     </div>
                 </form>
             </div>
@@ -93,7 +96,7 @@ const form = reactive({
 
 const deleteImages = async () => {
     try {
-        await api.DELETE(`api/destination/${destination.value.id}`)
+        await api.DELETE(`api/destination/${destination.value.id}/delete-images`)
         form.destination_images = []
         destination.value.destination_images = []
     } catch (error) {
@@ -112,7 +115,7 @@ const createImage = (file, index) => {
         reader.readAsDataURL(file)
         reader.onload = e => {
             const image = {
-                url: e.target?.result,
+                image_url: e.target?.result,
                 original: e.target?.result,
             }
             form.destination_images[ index ] = { ...image, file }
@@ -127,7 +130,7 @@ const onFileChange = async (event) => {
     }
 
     const files = event.target.files
-    let countImages = form.destination_images.filter(image => image.url).length
+    let countImages = form.destination_images.filter(image => image.image_url).length
     for (let i = 0; i < files.length; i++) {
         if (countImages >= 5) break
         await createImage(files[ i ], countImages)
@@ -149,7 +152,10 @@ const getFormData = () => {
         formData.append(`destination_tags[${index}]`, tag)
     })
     form.destination_images.forEach((image, index) => {
-        formData.append(`destination_images[${index}]`, dataURItoBlob(image.url))
+        if(image.id){ // skip old image
+            return
+        }
+        formData.append(`destination_images[${index}]`, dataURItoBlob(image.image_url))
     })
 
     return formData
@@ -161,7 +167,6 @@ const open = (data, region, tag) => {
     destination.value = data
     regions.value = region
     tags.value = tag
-    console.log(destination, region, tag)
 
     form.name = destination.value.name
     form.address = destination.value.address
@@ -181,10 +186,11 @@ const close = () => {
 const submit = async () => {
     submitting.value = true
     try {
-        const response = await api.POSTFORMDATA('/api/destination?_method=PUT', getFormData())
+        const response = await api.POSTFORMDATA(`/api/destination/${destination.value.id}?_method=PUT`, getFormData())
         emit('updated', response)
         close()
         alert('Destination Updated')
+        location.reload()
     } catch (error) {
         errors.value = api.formErrors(error)
     } finally {
@@ -343,8 +349,29 @@ button {
     border-radius: none;
 }
 
-
 .tag label,
 .tag label:before {
     transition: 0.25s all ease;
-}</style>
+}
+
+.img-box {
+    margin-top: .5rem;
+}
+
+.preview-img-box {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .3rem;
+}
+.preview-button {
+    margin-bottom: .5rem;
+}
+.preview-img {
+    width: 5rem;
+    height: 5rem;
+}
+.btn-remove {
+    margin-top: .5rem;
+    width: 100%;
+}
+</style>

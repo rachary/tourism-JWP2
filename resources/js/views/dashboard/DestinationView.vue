@@ -44,6 +44,7 @@
                         <td class="width12rem">
                             <div class="imgbox">
                                 <img class="imgpreview" v-for="image in destination.destination_images"  :src="image.filename.includes('http')?image.filename:'http://127.0.0.1:8000/storage/destination_images/'+image.filename" alt="">
+                                <!-- 'http://127.0.0.1:8000/storage/destination_images/'+image.filename -->
                             </div>
                         </td>
                         <td class="cta mid">
@@ -123,7 +124,7 @@ const destinationUpdated = (data) => {
             destination.address = data.address
             destination.description = data.description
             destination.location = data.location
-
+            destination.destination_region_id = data.destination_region_id
         }
 
         return destination
