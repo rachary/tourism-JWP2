@@ -50,7 +50,7 @@
                             </button>
                             <div class="img-box">
                                 <div class="preview-img-box">
-                                <img v-for="image in form.destination_images" class="preview-img" :src="image.image_url">
+                                <img v-for="image in form.destination_images" class="preview-img" :src="image.filename.includes('http')?image.filename:image.image_url">
                                 <!-- image.filename.includes('http')?image.filename:image.image_url -->
                                 </div>
                                 <input hidden ref="refDestinationImage" id="idDestinationImage" type="file" multiple

@@ -28,7 +28,7 @@ ul {
 }
 
 ::-webkit-scrollbar {
-   width: .5rem; 
+   width: .5rem;
 }
 ::-webkit-scrollbar-track {
     border-radius: .5rem;

@@ -66,7 +66,7 @@ main {
     width: 100%;
     height: 100vh;
 }
-.bg-img { 
+.bg-img {
     background-image: url('https://img.okezone.com/content/2022/12/08/337/2722874/ini-5-alasan-kenapa-kota-surabaya-disebut-kota-pahlawan-nWb0plbz3Y.jpg');
     width: 100%;
     height: 100%;
@@ -83,12 +83,12 @@ main {
     align-items: center;
 }
 .login {
-    width: 35%;
+    width: 40%;
 }
 form {
     background: rgba(176, 187, 192, 0.4);
     border-radius: 1rem;
-    padding: 0 1rem 2rem 1rem;
+    padding: 1rem 1rem 2rem 1rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -140,7 +140,79 @@ form img {
     color: white;
 }
 
-@media only screen and (max-width: 567px) {
+/* Responsive 480px */
+@media screen and (max-width: 480px) {
+    .login {
+        width: 100%;
+    }
+    form {
+        padding: 1rem 1rem 2rem 1rem;
+    }
+    .title {
+        margin-bottom: 2rem;
+        font-size: 1.5rem;
+        padding: 1rem;
+    }
+    .label {
+        font-size: .7rem;
+    }
+    .input {
+        width: 100%;
+        padding: .5rem .9rem;
+    }
+}
 
+/* Responsive 481px - 768px */
+@media screen and (min-width: 481px) and (max-width: 768px) {
+    .login {
+        width: 90%;
+    }
+    form {
+        padding: 1.2rem 1.2rem 2rem 1.2rem;
+    }
+    .title {
+        margin-bottom: 2rem;
+        font-size: 1.8rem;
+        padding: 1rem;
+    }
+    .label {
+        font-size: 1rem;
+        transform: translateY(-.7rem) translateX(1.1rem);
+    }
+    .input {
+        width: 100%;
+        padding: 1rem 1.1rem;
+        font-size: 1.1rem;
+    }
+    .call-admin {
+        font-size: 1.2rem;
+    }
+}
+
+/* Responsive 769px - 1024px */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+    .login {
+        width: 60%;
+    }
+    form {
+        padding: 1.2rem 1.2rem 2rem 1.2rem;
+    }
+    .title {
+        margin-bottom: 2rem;
+        font-size: 1.8rem;
+        padding: 1rem;
+    }
+    .label {
+        font-size: 1rem;
+        transform: translateY(-.7rem) translateX(1.1rem);
+    }
+    .input {
+        width: 100%;
+        padding: 1rem 1.1rem;
+        font-size: 1.1rem;
+    }
+    .call-admin {
+        font-size: 1.2rem;
+    }
 }
 </style>
