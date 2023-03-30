@@ -53,7 +53,7 @@
                             </button>
                             <div class="img-box">
                                 <div class="preview-img-box">
-                                <img class="preview-img" v-for="image in form.event_images" :src="image.image_url">
+                                <img class="preview-img" v-for="image in form.event_images" :src="image.filename.includes('http')?image.filename:image.image_url">
                                 </div>
                                 <input 
                                 hidden 
@@ -159,6 +159,9 @@ const getFormData = () => {
     formData.append('time', form.time)
     formData.append('organizer', form.organizer)
     form.event_images.forEach((image, index) => {
+        if(image.id){ // skip old image
+            return
+        }
         formData.append(`event_images[${index}]`, dataURItoBlob(image.image_url))
     })
 
@@ -188,10 +191,11 @@ const close = () => {
 const submit = async () => {
     submitting.value = true
     try {
-        const response = await api.POSTFORMDATA('/api/event?_method=PUT', getFormData())
+        const response = await api.POSTFORMDATA(`/api/event/${event.value.id}?_method=PUT`, getFormData())
         emit('updated', response)
         close()
         alert('Event Updated')
+        location.reload()
     } catch (error) {
         errors.value = api.formErrors(error)
     } finally {

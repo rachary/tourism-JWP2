@@ -96,16 +96,16 @@ const getEvents = async () => {
 }
 
 const eventUpdated = (data) => {
-    events.value = destinations.value.map(destination => {
-        if (destination.id === data.id) {
-            destination.name = data.name
-            destination.address = data.address
-            destination.description = data.description
-            destination.location = data.location
+    events.value = events.value.map(event => {
+        if (event.id === data.id) {
+            event.name = data.name
+            event.address = data.address
+            event.description = data.description
+            event.location = data.location
 
         }
 
-        return destination
+        return event
     })
 }
 

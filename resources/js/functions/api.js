@@ -3,7 +3,7 @@ import axios from 'axios'
 axios.defaults.withCredentials = true
 
 const config = {
-  baseURL: import.meta.env.VITE_BASE_API,
+  baseURL: location.protocol + '//' + import.meta.env.VITE_BASE_API,
   timeout: 30000, // 30s
   headers: {
     Accept: 'application/json',

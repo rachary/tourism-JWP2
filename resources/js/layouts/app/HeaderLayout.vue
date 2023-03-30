@@ -68,12 +68,12 @@ nav {
 .nav-list-active {
     position: absolute;
     flex-direction: column;
+    align-items: center;
     top: 100%;
     left: 0;
     gap: 0;
     width: 100%;
-    background: linear-gradient(to top, rgba(0, 0, 0, .5), rgba(255, 255, 255, .5));
-    backdrop-filter: blur(3px);
+    background: #8AAAE4;
 }
 
 .nav-link:hover, .nav-link-current-active {

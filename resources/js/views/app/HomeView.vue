@@ -54,7 +54,9 @@
                         </div>
                     </div>
                 </div>
-                <a href="#surabaya360" class="btn btn-cta">Explore</a>
+                <div class="middle">
+                    <a href="#surabaya360" class="btn btn-cta">Explore</a>
+                </div>
             </div>
         </div>
     </section>
@@ -251,6 +253,9 @@ section {
 /* Section 2 */
 #beauty-of-surabaya {
     padding-top: 3.5rem;
+}
+.middle {
+    text-align: center;
 }
 .beauty-box {
     display: flex;

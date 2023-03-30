@@ -64,24 +64,20 @@ footer {
     position: absolute;
     z-index: 10;
     background: #8AAAE4;
-    margin-top: 2rem;
-    padding: 1rem 1rem 2rem 3rem;
+    margin-top: 3rem;
+    padding: 3rem 1rem 2rem 3rem;
 }
-
 .container {
     display: flex;
     justify-content: space-between;
     gap: 5rem;
 }
-
 .card {
     flex: 1;
 }
 .card:nth-child(2) {
     margin-left: 5rem;
 }
-
-
 .card h5 {
     margin-bottom: 1rem;
     font-size: 1.6rem;
@@ -129,5 +125,114 @@ footer {
 }
 .card-third > a {
     width: fit-content;
+}
+
+/* Responsive 480px */
+@media screen and (max-width: 480px) {
+    footer {
+        margin-top: 3rem;
+        padding: 2rem 1rem;
+    }
+    .container {
+        flex-direction: column;
+        gap: 2rem;
+    }
+    .card:nth-child(2) {
+        margin-left: 0rem;
+    }
+    .card h5 {
+        margin-bottom: .5rem;
+        font-size: 1.6rem;
+        letter-spacing: 1px;
+    }
+    .fill {
+        gap: .8rem;
+    }
+    .card-first {
+        gap: .5rem;
+    }
+    .map {
+        gap: .5rem;
+        padding: .2rem 0;
+    }
+    .card-first:last-child {
+        margin-top: 1.3rem;
+    }
+    .card-third-fill {
+        gap: .8rem;
+    }
+}
+
+/* Responsive 481px - 768px */
+@media screen and (min-width: 481px) and (max-width: 768px) {
+    footer {
+        margin-top: 3rem;
+        padding: 2rem 1rem;
+    }
+    .container {
+        flex-direction: column;
+        gap: 2rem;
+    }
+    .card:nth-child(2) {
+        margin-left: 0rem;
+    }
+    .card h5 {
+        margin-bottom: .5rem;
+        font-size: 1.6rem;
+        letter-spacing: 1px;
+    }
+    .fill {
+        gap: .8rem;
+    }
+    .card-first {
+        gap: .5rem;
+    }
+    .map {
+        gap: .5rem;
+        padding: .2rem 0;
+    }
+    .card-first:last-child {
+        margin-top: 1.3rem;
+    }
+    .card-third-fill {
+        gap: .8rem;
+    }
+}
+
+/* Responsive 769px - 1024px */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+    footer {
+        margin-top: 3rem;
+        padding: 2rem 1rem;
+    }
+    .container {
+        flex-direction: row;
+        max-width: 100%;
+        gap: 2rem;
+    }
+    .card:nth-child(2) {
+        margin-left: 0rem;
+    }
+    .card h5 {
+        margin-bottom: .5rem;
+        font-size: 1.6rem;
+        letter-spacing: 1px;
+    }
+    .fill {
+        gap: .8rem;
+    }
+    .card-first {
+        gap: .5rem;
+    }
+    .map {
+        gap: .5rem;
+        padding: .2rem 0;
+    }
+    .card-first:last-child {
+        margin-top: 1.3rem;
+    }
+    .card-third-fill {
+        gap: .8rem;
+    }
 }
 </style>

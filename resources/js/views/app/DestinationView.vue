@@ -97,7 +97,7 @@ const filterSearch = computed(() => {
                 matchName = destination.name.toLowerCase().includes(searchName.value.toLowerCase())
             }
             return matchTag && matchName && matchRegion
-        }) 
+        })
         return filterData.value
     } else {
         return destinations.value
@@ -167,7 +167,6 @@ section {
     color: white;
     border-radius: .5rem;
 }
-
 select option:hover {
     filter: brightness(150%);
 }
@@ -186,24 +185,153 @@ select option:hover {
     background: #FFE7CC;
 }
 
-@media screen and (max-width: 476px) {
-    .responsive-div {
+/* Responsive 480px */
+@media screen and (max-width: 480px) {
+    section {
+        padding: 0 1rem;
+    }
+    .wrap {
+        padding: 0rem;
+    }
+    .headline {
+        margin-top: 5rem;
+        font-size: 3rem;
+    }
+    .menu-cta {
+        justify-content: center;
         flex-direction: column;
     }
-
-    .responsive-button {
+    .menu-search {
         flex-direction: column-reverse;
+        font-size: 1.2rem;
     }
 
-    .responsive-button button {
-        min-width: 100%;
-        justify-content: center;
+    .menu-search input {
+        width: 100%;
+        padding: .5rem 1rem;
+        border-radius: .5rem;
     }
 
-    .responsive-div select option {
-        width: min-content;
-        display: inline-block;
-        text-align: center;
-        justify-content: center;
+    .search-btn {
+        padding: .5rem 1rem;
+        border-radius: .5rem;
     }
-}</style>
+    .menu-select {
+        padding: .5rem 1rem;
+        font-size: 1.2rem;
+    }
+    .content-destination {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        min-height: 80vh;
+        overflow: auto;
+        padding: 0 1rem;
+        border: 1px solid #888;
+        border-radius: .5rem;
+        background: #FFE7CC;
+    }
+}
+
+/* Responsive 481px - 768px */
+@media screen and (min-width: 481px) and (max-width: 768px) {
+    section {
+        padding: 0 1rem;
+    }
+    .wrap {
+        padding: 0rem;
+    }
+    .headline {
+        margin-top: 5rem;
+        font-size: 3rem;
+    }
+    .menu-cta {
+        justify-content: center;
+        flex-direction: column;
+    }
+    .menu-search {
+        flex-direction: column-reverse;
+        font-size: 1.2rem;
+    }
+
+    .menu-search input {
+        width: 100%;
+        padding: .5rem 1rem;
+        border-radius: .5rem;
+    }
+
+    .search-btn {
+        padding: .5rem 1rem;
+        border-radius: .5rem;
+    }
+    .menu-select {
+        padding: .5rem 1rem;
+        font-size: 1.2rem;
+    }
+    .content-destination {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        min-height: 80vh;
+        overflow: auto;
+        padding: 0 1rem;
+        border: 1px solid #888;
+        border-radius: .5rem;
+        background: #FFE7CC;
+    }
+}
+
+/* Responsive 769px - 1024px */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+    section {
+        padding: 0 1rem;
+    }
+    .wrap {
+        padding: 0rem;
+    }
+    .headline {
+        margin-top: 5rem;
+        font-size: 3rem;
+    }
+    .menu-cta {
+        justify-content: center;
+        flex-direction: column;
+    }
+    .menu-search {
+        flex-direction: column-reverse;
+        font-size: 1.2rem;
+    }
+
+    .menu-search input {
+        width: 100%;
+        padding: .5rem 1rem;
+        border-radius: .5rem;
+    }
+
+    .search-btn {
+        padding: .5rem 1rem;
+        border-radius: .5rem;
+    }
+    .menu-select {
+        padding: .5rem 1rem;
+        font-size: 1.2rem;
+    }
+    .content-destination {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        min-height: 80vh;
+        overflow: auto;
+        padding: 0 1rem;
+        border: 1px solid #888;
+        border-radius: .5rem;
+        background: #FFE7CC;
+    }
+}
+</style>
