@@ -320,4 +320,134 @@ section {
     box-shadow: 5px 10px 5px 1px rgba(0, 0, 0, .5);
     text-align: center;
 }
+
+/* Reponsive 480px */
+@media screen and (max-width: 480px) {
+    .size {
+        font-size: 3rem;
+    }
+    .sub-size {
+        font-size: 2rem;
+    }
+    .headline-description h5 {
+        font-size: 1rem;
+    }
+    .beauty-box {
+        flex-direction: column;
+        gap: 2rem;
+    }
+    .img-card {
+        min-width: 100%;
+        min-height: 100%;
+        width: 20rem;
+        height: 15rem;
+        overflow: hidden;
+    }
+    .beauty-card {
+        flex-direction: column;
+        display: flex;
+        gap: 1rem;
+        width: fit-content;
+        max-width: 100%;
+        height: fit-content;
+    }
+    .content-title {
+        font-size: 1.2rem;
+        font-weight: bold;
+    }
+    .ellipsis p {
+        display: -webkit-box;
+        -webkit-line-clamp: 8;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        width:100%;
+    }
+}
+
+/* Reponsive 481px - 768px */
+@media screen and (min-width: 481px) and (max-width: 768px) {
+    .size {
+        font-size: 3rem;
+    }
+    .sub-size {
+        font-size: 2rem;
+    }
+    .headline-description h5 {
+        font-size: 1rem;
+    }
+    .beauty-box {
+        flex-direction: column;
+        gap: 2rem;
+    }
+    .img-card {
+        min-width: 100%;
+        min-height: 100%;
+        width: 20rem;
+        height: 15rem;
+        overflow: hidden;
+    }
+    .beauty-card {
+        flex-direction: column;
+        display: flex;
+        gap: 1rem;
+        width: fit-content;
+        max-width: 100%;
+        height: fit-content;
+    }
+    .content-title {
+        font-size: 1.2rem;
+        font-weight: bold;
+    }
+    .ellipsis p {
+        display: -webkit-box;
+        -webkit-line-clamp: 8;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        width:100%;
+    }
+}
+
+/* Reponsive 769px - 1024px */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+    .size {
+        font-size: 3rem;
+    }
+    .sub-size {
+        font-size: 2rem;
+    }
+    .headline-description h5 {
+        font-size: 1rem;
+    }
+    .beauty-box {
+        flex-direction: column;
+        gap: 2rem;
+    }
+    .img-card {
+        min-width: 40%;
+        min-height: 40%;
+        width: 20rem;
+        height: 15rem;
+        overflow: hidden;
+    }
+    .beauty-card {
+        flex-direction: row;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        width: fit-content;
+        max-width: 100%;
+        height: fit-content;
+    }
+    .content-title {
+        font-size: 1.2rem;
+        font-weight: bold;
+    }
+    .ellipsis p {
+        display: -webkit-box;
+        -webkit-line-clamp: 8;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        width:100%;
+    }
+}
 </style>
