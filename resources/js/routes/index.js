@@ -93,13 +93,13 @@ router.beforeEach((to, from, next) => {
         } else {
             next('/dashboard')
         }
-    } 
+    }
     /**
      * Route Guard for login
      */
     if (to.path === '/login') {
         if (userrole) {
-            next('/dashboard');        
+            next('/dashboard');
         } else {
             next();
         }

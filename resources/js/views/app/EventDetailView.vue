@@ -14,7 +14,7 @@
                             Alamat: {{ events.address }}
                         </div>
                         <div class="linebox date">
-                            Tanggal: {{ events.date_start }} - {{ events.date_end }} 
+                            Tanggal: {{ events.date_start }} - {{ events.date_end }}
                         </div>
                         <div class="linebox time">
                             Pukul: {{ events.time }}
@@ -22,7 +22,6 @@
                         <div class="linebox organizer">
                             Penyelenggara: {{ events.organizer }}
                         </div>
-                        
                     </div>
                 </div>
                 <div class="container-content">
@@ -40,7 +39,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
+import { ref } from 'vue';
 import { useRoute } from 'vue-router';
 import api from '../../functions/api';
 
@@ -78,19 +77,20 @@ getEventImage()
 section {
     display: inline-block;
 }
-
-.container {
-    margin: 4.8rem auto;
+.wrap {
+    padding: 0 15rem;
 }
-
+.container {
+    margin: 6rem auto 3rem auto;
+}
 .container-title {
     font-size: 3rem;
     text-align: center;
     margin: 2rem;
 }
 .container-img {
-    width: 50%;
-    height: 70vh;
+    width: 90%;
+    height: 60vh;
     margin: 1rem auto;
     border-radius: .5rem;
     display: flex;
@@ -98,10 +98,9 @@ section {
     align-items: center;
     gap: .5rem;
 }
-
 .img-preview {
-    width: 60%;
-    height: 70vh;
+    width: 70%;
+    height: 60vh;
     margin: 1rem auto;
     overflow: hidden;
     border-radius: .5rem;
@@ -118,35 +117,132 @@ section {
     height: 100%;
     object-fit: cover;
 }
-
-.content-head {
-    font-size: 1.5rem;
-}
-
-.content-head .content {
-    display: flex;
-    font-size: 1.1rem;
-    gap: 1rem;
-}
-
 .content-description {
     margin-top: 1rem;
 }
-
 .content-location {
     margin-top: 2rem;
     font-size: 1.1rem;
     text-align: center;
 }
-
 .iframe {
     margin-top: .5rem;
     width: 100%;
 }
-
 .linebox {
     border: 1px solid #526CEB;
     padding: .5rem;
     border-radius: .5rem;
+}
+
+/* Responsive 480px */
+@media screen and (max-width: 480px) {
+    .wrap {
+        padding: 0 1rem;
+    }
+    .container {
+        margin: 6rem auto 3rem auto;
+    }
+    .container-title {
+        font-size: 2.5rem;
+        text-align: center;
+        margin: 0rem;
+    }
+    .container-img {
+        width: 100%;
+        flex-direction: column;
+        height: auto;
+        gap: 1rem;
+    }
+    .img-preview {
+        width: 100%;
+        height: 60vh;
+    }
+    .content-preview {
+        width: 100%;
+        gap: 1rem;
+        font-size: .9rem;
+    }
+    .content-description {
+        font-size: .9rem;
+    }
+    .content-location {
+        margin-top: 1rem;
+        font-size: 1rem;
+    }
+}
+
+/* Responsive 481px - 768px */
+@media screen and (min-width: 481px) and (max-width: 768px) {
+    .wrap {
+        padding: 0 5rem;
+    }
+    .container {
+        margin: 6rem auto 3rem auto;
+    }
+    .container-title {
+        font-size: 2.5rem;
+        text-align: center;
+        margin: 0rem;
+    }
+    .container-img {
+        width: 100%;
+        flex-direction: column;
+        height: auto;
+        gap: 1rem;
+    }
+    .img-preview {
+        width: 100%;
+        height: 65vh;
+    }
+    .content-preview {
+        width: 100%;
+        gap: 1rem;
+        font-size: .9rem;
+    }
+    .content-description {
+        font-size: .9rem;
+    }
+    .content-location {
+        margin-top: 1rem;
+        font-size: 1rem;
+    }
+}
+
+/* Responsive 769px - 1024px */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+    .wrap {
+        padding: 0 5rem;
+    }
+    .container {
+        margin: 6rem auto 3rem auto;
+    }
+    .container-title {
+        font-size: 2.5rem;
+        text-align: center;
+        margin: 0rem;
+    }
+    .container-img {
+        width: 100%;
+        flex-direction: column;
+        height: auto;
+        gap: 1rem;
+    }
+    .img-preview {
+        width: 100%;
+        height: 75vh;
+    }
+    .content-preview {
+        width: 100%;
+        gap: 1rem;
+        font-size: .9rem;
+    }
+    .content-description {
+        font-size: .9rem;
+    }
+    .content-location {
+        margin-top: 1rem;
+        font-size: 1rem;
+    }
 }
 </style>
