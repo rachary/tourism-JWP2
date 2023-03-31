@@ -15,7 +15,7 @@
                     </div>
                     <div class="single-animation">
                         <h5>Let's explore one of the biggest city in Indonesia with famous name called City of Heroes.</h5>
-                        <a href="#beauty-of-surabaya" class="btn btn-cta">Explore</a>
+                        <a href="#beauty-of-surabaya" class="btn btn-cta">Explore more</a>
                     </div>
                 </div>
             </div>
@@ -55,7 +55,7 @@
                     </div>
                 </div>
                 <div class="middle">
-                    <a href="#surabaya360" class="btn btn-cta">Explore</a>
+                    <a href="#surabaya360" class="btn btn-cta">Explore 360&deg;</a>
                 </div>
             </div>
         </div>
@@ -74,7 +74,7 @@
                         <source src="https://tourism.surabaya.go.id/assets/front/videos/360.mp4">
                     </video>
                     <a href="https://virtualtourism.surabaya.go.id/" target="_blank" class="btn-cta btn">
-                        Tekan untuk <br> explore 360&deg;
+                        Tekan untuk <br> surabaya 360&deg;
                     </a>
                 </div>
             </div>
@@ -120,7 +120,6 @@ const getEvent = async () => {
     try {
         const response = await api.GET('/api/event')
         events.value = response.data
-        console.log(response.data)
         if (events.value.length >= 2) {
             const randomIndex = []
             while (randomIndex.length < 2) {
@@ -133,7 +132,6 @@ const getEvent = async () => {
                 events.value[randomIndex[0]],
                 events.value[randomIndex[1]],
             ]
-            console.log(randomEvents.value)
         }
     } finally {
         loading.value = false

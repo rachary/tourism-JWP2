@@ -18,10 +18,10 @@
                                 <fa-icon class="icon" icon="fa-solid fa-location-dot" />
                                 {{ destinations.address }}
                             </div>
-                            <div>
+                            <!-- <div>
                                 <fa-icon class="icon" icon="fa-solid fa-tags" />
                                 TAG
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                     <div class="content-description">
@@ -38,7 +38,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
+import { ref } from 'vue';
 import { useRoute } from 'vue-router';
 import api from '../../functions/api';
 
@@ -86,6 +86,9 @@ getDestinationTag()
 section {
     display: inline-block;
 }
+.wrap {
+    padding: 0 5rem;
+}
 
 .container {
     margin: 4.8rem auto;
@@ -132,5 +135,97 @@ section {
 .iframe {
     margin-top: .5rem;
     width: 100%;
+}
+
+/* Responsive 480px */
+@media screen and (max-width: 480px) {
+    .wrap {
+        padding: 0 2rem;
+    }
+    .container-title {
+        font-size: 2.5rem;
+        margin: 1rem;
+    }
+    .container-img {
+        width: 100%;
+        height: 35vh;
+    }
+    .content-head {
+        font-size: 1.3rem;
+    }
+    .content-head .content {
+        font-size: 1rem;
+    }
+    .content-description {
+        margin-top: 1rem;
+    }
+    .content-location {
+        margin-top: 1.5rem;
+        font-size: 1rem;
+    }
+}
+
+/* Responsive 481px - 768px */
+@media screen and (min-width: 481px) and (max-width: 768px) {
+    .wrap {
+        padding: 0 3rem;
+    }
+    .container {
+        margin: 6rem auto 3rem auto;
+    }
+    .container-title {
+        font-size: 2.5rem;
+        margin: 1rem;
+    }
+    .container-img {
+        width: 100%;
+        height: 35vh;
+    }
+    .content-head {
+        font-size: 1.3rem;
+    }
+    .content-head .content {
+        font-size: 1rem;
+    }
+    .content-description {
+        margin-top: 1rem;
+    }
+    .content-location {
+        margin-top: 1.5rem;
+        font-size: 1rem;
+    }
+}
+
+/* Responsive 769px - 1024px */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+    .wrap {
+        padding: 0 4rem;
+    }
+    .container {
+        margin: 6rem auto 3rem auto;
+    }
+    .container-title {
+        font-size: 2.6rem;
+        margin: 1rem;
+    }
+    .container-img {
+        width: 100%;
+        height: 59vh;
+    }
+    .content-head {
+        font-size: 1.5rem;
+    }
+    .content-head .content {
+        font-size: 1.1rem;
+    }
+    .content-description {
+        margin-top: 1rem;
+        font-size: 1.1rem;
+        line-height: 1.6;
+    }
+    .content-location {
+        margin-top: 1.5rem;
+        font-size: 1.1rem;
+    }
 }
 </style>
