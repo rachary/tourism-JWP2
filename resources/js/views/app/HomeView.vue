@@ -80,7 +80,80 @@
             </div>
         </div>
     </section>
-
+    <section id="treatment">
+      <div class="wrap">
+        <div class="global-headline">
+            <h2 class="sub-headline">Meet</h2>
+            <h1 class="headline headline-second">Our Teams</h1>
+        </div>
+        <div class="cardbox">
+            <div class="card__1">
+              <img class="card_img_1" src="../../assets/profile/profile_2.jpg" alt="">
+              <div class="card_headline_1">
+                <p class="headline_1">
+                  Ary
+                </p>
+                <p class="headline_2">
+                  Front-end & Back-end
+                </p>
+              </div>
+              <a href="#">
+                <div class="card_cta_1">
+                  <p>Ketua</p>
+                </div>
+              </a>
+            </div>
+            <div class="card__1">
+              <img class="card_img_1" src="../../assets/profile/profile_3.jpg" alt="">
+              <div class="card_headline_1">
+                <p class="headline_1">
+                  Izra
+                </p>
+                <p class="headline_2">
+                  Front-end
+                </p>
+              </div>
+              <a href="#">
+                <div class="card_cta_1">
+                  <p>Anggota</p>
+                </div>
+              </a>
+            </div>
+            <div class="card__1">
+              <img class="card_img_1" src="../../assets/profile/profile_4.jpg" alt="">
+              <div class="card_headline_1">
+                <p class="headline_1">
+                  Ismi
+                </p>
+                <p class="headline_2">
+                  Front-end
+                </p>
+              </div>
+              <a href="#">
+                <div class="card_cta_1">
+                  <p>Anggota</p>
+                </div>
+              </a>
+            </div>
+            <div class="card__1">
+              <img class="card_img_1" src="../../assets/profile/profile_1.jpg" alt="">
+              <div class="card_headline_1">
+                <p class="headline_1">
+                  Naufal
+                </p>
+                <p class="headline_2">
+                  Back-end
+                </p>
+              </div>
+              <a href="#">
+                <div class="card_cta_1">
+                  <p>Anggota</p>
+                </div>
+              </a>
+            </div>
+          </div>
+      </div>
+    </section>
 </template>
 
 <script setup>
@@ -318,6 +391,78 @@ section {
     box-shadow: 5px 10px 5px 1px rgba(0, 0, 0, .5);
     text-align: center;
 }
+.cardbox {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 2rem;
+  justify-content: center;
+}
+
+/* Card 1 */
+.card__1 {
+  width: 20%;
+  height: 400px;
+  position: relative;
+  background: linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .1));
+  border-radius: 2rem;
+  overflow: hidden;
+}
+.card__1 .card_img_1 {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  z-index: -1;
+}
+.card__1 .card_headline_1 {
+  color: white;
+  padding: 1.5rem 2rem;
+}
+.card__1 .card_headline_1 .headline_1 {
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 1.2;
+  pointer-events: none;
+  position: relative;
+  z-index: 2;
+}
+.card__1 .card_headline_1 .headline_2 {
+  margin-top: .5rem;
+  font-size: .7rem;
+  pointer-events: none;
+}
+.card__1 .card_headline_1 .headline_1::selection,
+.card__1 .card_headline_1 .headline_2::selection {
+  background: #8AAAE4;
+}
+.card__1 .card_cta_1 {
+  color: white;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: #8AAAE4;
+  width: 25%;
+  height: 20%;
+  border-radius: 2rem 0 0 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: .4s;
+}
+.card__1 .card_cta_1:hover {
+  width: 100%;
+  height: 100%;
+}
+.card__1 .card_cta_1 p {
+  color: white;
+  font-size: .8rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+.card__1 .card_cta_1 p::selection {
+  background: var(--green);
+}
 
 /* Reponsive 480px */
 @media screen and (max-width: 480px) {
@@ -359,6 +504,10 @@ section {
         -webkit-box-orient: vertical;
         overflow: hidden;
         width:100%;
+    }
+    .card__1 {
+        width: 100%;
+        height: 400px;
     }
 }
 
@@ -403,6 +552,10 @@ section {
         overflow: hidden;
         width:100%;
     }
+    .card__1 {
+        width: 45%;
+        height: 400px;
+    }
 }
 
 /* Reponsive 769px - 1024px */
@@ -446,6 +599,10 @@ section {
         -webkit-box-orient: vertical;
         overflow: hidden;
         width:100%;
+    }
+    .card__1 {
+        width: 45%;
+        height: 400px;
     }
 }
 </style>
